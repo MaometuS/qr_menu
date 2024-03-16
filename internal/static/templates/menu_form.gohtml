@@ -1,0 +1,41 @@
+{{define "menu_form"}}
+    <div class="base-modal">
+        <div class="base-modal-overlay"></div>
+        <div class="base-modal-main">
+            <div class="base-modal-header">
+                <h2>Edit menu info</h2>
+            </div>
+            <div class="base-modal-body">
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label class="base-form-label required">
+                            <span class="base-form-label-name">Menu name</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-checkbox">
+                            <input type="checkbox" class="base-form-checkbox-input">
+                            <i class="base-form-checkbox-button"></i>
+                            <span class="base-form-checkbox-text">
+                                Menu is visible
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="base-modal-footer">
+                <div class="crud-modal-footer">
+                    <button class="base-button base-button-secondary">Cancel</button>
+                    <button class="base-button base-button-default">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}

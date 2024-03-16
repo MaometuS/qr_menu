@@ -1,0 +1,69 @@
+{{define "category_form"}}
+    <div class="base-modal">
+        <div class="base-modal-overlay"></div>
+        <div class="base-modal-main">
+            <div class="base-modal-header">
+                <h2>Edit category info</h2>
+            </div>
+            <div class="base-modal-body">
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label class="base-form-label required">
+                            <span class="base-form-label-name">Category name</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-label required">
+                            <span class="base-form-label-name">Menu</span>
+                            <select class="base-form-select">
+                                <option value="DZD">Algerian dinar (دينار جزائري, دج)</option>
+                                <option value="ARS">Argentine peso (Peso argentino, $)</option>
+                                <option value="AMD">Armenian dram (Հայկական Դրամ, ֏)</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-checkbox">
+                            <input type="checkbox" class="base-form-checkbox-input">
+                            <i class="base-form-checkbox-button"></i>
+                            <span class="base-form-checkbox-text">
+                                Category is visible
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-label">
+                            <span class="base-form-label-name">Category image</span>
+                        </label>
+                        <div class="image-picker" style="height: auto; aspect-ratio: 3 / 1;">
+                            <div class="image-picker-dropzone">
+                                <div class="image-picker-dropzone-text">Upload image</div>
+                                <input type="file" class="image-picker-dropzone-input">
+                                <div class="image-picker-dropzone-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="base-modal-footer">
+                <div class="crud-modal-footer">
+                    <button class="base-button base-button-secondary">Cancel</button>
+                    <button class="base-button base-button-default">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}

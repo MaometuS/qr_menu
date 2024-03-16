@@ -1,0 +1,146 @@
+{{define "item_form"}}
+    <div class="base-modal">
+        <div class="base-modal-overlay"></div>
+        <div class="base-modal-main">
+            <div class="base-modal-header">
+                <h2>Edit item info</h2>
+            </div>
+            <div class="base-modal-body">
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label class="base-form-label required">
+                            <span class="base-form-label-name">Item name</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                    <div class="base-form-row">
+                        <label class="base-form-label">
+                            <span class="base-form-label-name">Weight</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label class="base-form-label required">
+                            <span class="base-form-label-name">Variant 1</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                    <div class="base-form-row row-6">
+                        <label class="base-form-label required">
+                            <span class="base-form-label-name">Price</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                    <div class="base-form-row row-4">
+                        <button class="base-button base-button-secondary">Remove</button>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label class="base-form-label required">
+                            <span class="base-form-label-name">Variant 2</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                    <div class="base-form-row row-6">
+                        <label class="base-form-label required">
+                            <span class="base-form-label-name">Price</span>
+                            <span class="base-form-input">
+                                <input type="text" class="base-form-input-input">
+                            </span>
+                        </label>
+                    </div>
+                    <div class="base-form-row row-4">
+                        <button class="base-button base-button-secondary">Remove</button>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <button class="base-button base-button-secondary" style="width: 100%">Add variant</button>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-label">
+                            <span class="base-form-label-name">Additional info</span>
+                            <span class="base-form-input">
+                                <textarea class="base-form-input-input"></textarea>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-label">
+                            <span class="base-form-label-name">Item image</span>
+                        </label>
+                        <div class="image-picker" style="height: auto; aspect-ratio: 1.61 / 1;">
+                            <div class="image-picker-dropzone">
+                                <div class="image-picker-dropzone-text">Upload image</div>
+                                <input type="file" class="image-picker-dropzone-input">
+                                <div class="image-picker-dropzone-overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-checkbox">
+                            <input type="checkbox" class="base-form-checkbox-input">
+                            <i class="base-form-checkbox-button"></i>
+                            <span class="base-form-checkbox-text">
+                                Item is visible
+                            </span>
+                        </label>
+                    </div>
+                    <div class="base-form-row">
+                        <label for="" class="base-form-checkbox">
+                            <input type="checkbox" class="base-form-checkbox-input">
+                            <i class="base-form-checkbox-button"></i>
+                            <span class="base-form-checkbox-text">
+                                Item is available
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="base-form-row-wr">
+                    <div class="base-form-row">
+                        <label for="" class="base-form-label required">
+                            <span class="base-form-label-name">Category</span>
+                            <select class="base-form-select">
+                                <option value="DZD">Algerian dinar (دينار جزائري, دج)</option>
+                                <option value="ARS">Argentine peso (Peso argentino, $)</option>
+                                <option value="AMD">Armenian dram (Հայկական Դրամ, ֏)</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="base-modal-footer">
+                <div class="crud-modal-footer">
+                    <button class="base-button base-button-secondary">Cancel</button>
+                    <button class="base-button base-button-default">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{{end}}

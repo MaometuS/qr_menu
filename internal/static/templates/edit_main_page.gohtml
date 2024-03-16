@@ -1,0 +1,104 @@
+{{define "edit_main_page"}}
+    <!doctype html>
+    <html lang="en">
+    {{template "head" "Test page"}}
+    <body class="body">
+    <div class="page">
+        <div class="page-head"></div>
+        <div class="page-content">
+            <h1 class="page-title">
+                <span>Demo</span>
+                <button class="icon-button">
+                    <img src="/assets/pen.svg" alt="">
+                </button>
+            </h1>
+            <div class="page-info">
+                <div class="page-info_block_container">
+                    <div class="page-info_block">
+                        <img src="/assets/location.svg" alt="">
+                        <a href="#">Kontraktova ploshcha 1, Kyiv, Ukraine</a>
+                    </div>
+                    <div class="page-info_block">
+                        <img src="/assets/phone.svg" alt="">
+                        <a href="#">012 3456 7890</a>
+                    </div>
+                    <div class="page-info_block">
+                        <img src="/assets/wifi.svg" alt="">
+                        <a href="#">WiFi ID: Demo, Pass: 1234</a>
+                    </div>
+                </div>
+                <div class="page-info-description">
+                    <p>
+                        Here you can add additional information for your guests, like taxes, service fees, restaurant working hours, contacts, delivery terms, general QR code menu information, and so on
+                    </p>
+                    <p>You can also add spacings</p>
+                </div>
+            </div>
+            <div class="page-main">
+                <div class="menu _admin">
+                    <div class="menu-item">
+                        <button class="icon-button admin-item-add-button">
+                            <img src="/assets/plus.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="menu-item _selected">
+                        <div class="menu-item-wrapper">
+                            <div class="menu-item-button">
+                                <span>Main menu</span>
+                            </div>
+                            <div class="menu-admin-actions">
+                                <div class="item-admin-actions">
+                                    <button class="icon-button item-admin-actions-item">
+                                        <img src="/assets/right_menu_action.svg" alt="">
+                                    </button>
+                                    <button class="icon-button item-admin-actions-item">
+                                        <img src="/assets/edit_menu_action.svg" alt="">
+                                    </button>
+                                    <button class="icon-button item-admin-actions-item">
+                                        <img src="/assets/delete_menu_action.svg" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <button class="icon-button admin-item-add-button">
+                            <img src="/assets/plus.svg" alt="">
+                        </button>
+                    </div>
+                    <div class="menu-item">
+                        <div class="menu-item-wrapper">
+                            <div class="menu-item-button">
+                                <span>Bar</span>
+                            </div>
+                            <div class="menu-admin-actions">
+                                <div class="item-admin-actions">
+                                    <button class="icon-button item-admin-actions-item">
+                                        <img src="/assets/right_menu_action.svg" alt="">
+                                    </button>
+                                    <button class="icon-button item-admin-actions-item">
+                                        <img src="/assets/edit_menu_action.svg" alt="">
+                                    </button>
+                                    <button class="icon-button item-admin-actions-item">
+                                        <img src="/assets/delete_menu_action.svg" alt="">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item">
+                        <button class="icon-button admin-item-add-button">
+                            <img src="/assets/plus.svg" alt="">
+                        </button>
+                    </div>
+                </div>
+                {{ template "edit_category_page"}}
+            </div>
+            <div class="page_content-footer">
+                <a href="#">qrmenu</a>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
+{{end}}
