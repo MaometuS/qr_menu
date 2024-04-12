@@ -1,5 +1,5 @@
 {{define "order"}}
-    <div class="order" selected-menu="[object Object]">
+    <div class="order">
         <div class="place-nav">
             <div class="wrapper">
                 <button class="back-button" hx-get="/categories?menu_id={{.MenuID}}" hx-target="#main_body">
@@ -8,7 +8,7 @@
             </div>
         </div>
         <h2 class="h2">
-            <span>My order:</span>
+            <span>Мой заказ:</span>
         </h2>
         <div class="order-item-list">
             {{range .Items}}
@@ -20,7 +20,7 @@
                         <div class="order-item-price">
                             <div class="menu-item-price small">
                                 <span class="menu-item-price-content">
-                                    <b>{{.Price}}</b> <span>$</span>
+                                    <b>{{.Price}}</b> <span></span>
                                 </span>
                             </div>
                         </div>
@@ -44,10 +44,10 @@
             {{end}}
         </div>
         <div class="order-total-price">
-            <span>Total: </span>
+            <span>Итого: </span>
             <div class="menu-item-price.regular">
                 <span class="menu-item-price-content">
-                    <b id="price_total">{{.Total}}</b><span>$</span>
+                    <b id="price_total">{{.Total}}</b><span></span>
                 </span>
             </div>
         </div>

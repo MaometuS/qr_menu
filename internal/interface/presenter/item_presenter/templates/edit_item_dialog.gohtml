@@ -12,13 +12,13 @@
             <div class="base-modal-overlay"></div>
             <div class="base-modal-main">
                 <div class="base-modal-header">
-                    <h2>Edit item info</h2>
+                    <h2>Редактировать продукт</h2>
                 </div>
                 <div class="base-modal-body">
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label class="base-form-label required">
-                                <span class="base-form-label-name">Item name</span>
+                                <span class="base-form-label-name">Название</span>
                                 <span class="base-form-input">
                                 <input type="text" name="name" value="{{.Name}}" class="base-form-input-input" required>
                             </span>
@@ -29,7 +29,7 @@
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label class="base-form-label">
-                                <span class="base-form-label-name">Weight</span>
+                                <span class="base-form-label-name">Вес</span>
                                 <span class="base-form-input">
                                 <input type="text" name="weight" value="{{.Weight}}" class="base-form-input-input" required>
                             </span>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="base-form-row">
                             <label class="base-form-label">
-                                <span class="base-form-label-name">Price</span>
+                                <span class="base-form-label-name">Цена</span>
                                 <span class="base-form-input">
                                 <input type="text" name="price" value="{{.Price}}" class="base-form-input-input" required>
                             </span>
@@ -98,7 +98,7 @@
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label for="" class="base-form-label">
-                                <span class="base-form-label-name">Additional info</span>
+                                <span class="base-form-label-name">Доп. информация</span>
                                 <span class="base-form-input">
                                 <textarea class="base-form-input-input" name="additional_info">{{.AdditionalInfo}}</textarea>
                             </span>
@@ -109,7 +109,7 @@
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label for="" class="base-form-label">
-                                <span class="base-form-label-name">Item image</span>
+                                <span class="base-form-label-name">Изображение</span>
                                 <input type="file" name="image" class="custom-image-picker" accept="image/*">
                             </label>
 {{/*                            <div class="image-picker" style="height: auto; aspect-ratio: 1.61 / 1;">*/}}
@@ -127,18 +127,14 @@
                             <label for="" class="base-form-checkbox">
                                 <input type="checkbox" class="base-form-checkbox-input" name="is_visible" {{if .IsVisible}}checked{{end}}>
                                 <i class="base-form-checkbox-button"></i>
-                                <span class="base-form-checkbox-text">
-                                Item is visible
-                            </span>
+                                <span class="base-form-checkbox-text">Показывать продукт</span>
                             </label>
                         </div>
                         <div class="base-form-row">
                             <label for="" class="base-form-checkbox">
                                 <input type="checkbox" class="base-form-checkbox-input" name="is_available" {{if .IsAvailable}}checked{{end}}>
                                 <i class="base-form-checkbox-button"></i>
-                                <span class="base-form-checkbox-text">
-                                Item is available
-                            </span>
+                                <span class="base-form-checkbox-text">Продукт доступен</span>
                             </label>
                         </div>
                     </div>
@@ -158,8 +154,8 @@
                 </div>
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
-                        <button class="base-button base-button-secondary" id="close_edit_item_dialog_{{.OrderParam}}">Cancel</button>
-                        <button type="submit" class="base-button base-button-default" id="reset_edit_item_form_{{.OrderParam}}">Save</button>
+                        <button class="base-button base-button-secondary" id="close_edit_item_dialog_{{.OrderParam}}">Отменить</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_item_form_{{.OrderParam}}">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -182,13 +178,13 @@
                     document.getElementById("edit_item_dialog_{{.OrderParam}}").style.display = "none";
                 }, 10);
                 Snackbar.show({
-                    text: 'Operation done successfully',
-                    actionText: 'Close',
+                    text: 'Продукт успешно отредактирован',
+                    actionText: 'Закрыть',
                 });
             } else {
                 Snackbar.show({
-                    text: 'There was an error, please check the correctness',
-                    actionText: 'Close',
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
                 });
             }
         });

@@ -6,7 +6,7 @@
                    <input type="hidden" name="establishment" value="{{.EstablishmentID}}">
                    <input type="hidden" name="menu" value="{{.MenuID}}">
                    <div class="search-form-input">
-                       <input type="text" name="search" value="{{.Search}}" placeholder="Search...">
+                       <input type="text" name="search" value="{{.Search}}" placeholder="Поиск...">
                    </div>
                    <button type="submit" class="search-form-button">
                        <img src="/assets/search.svg" alt="">
@@ -39,7 +39,7 @@
                            <div class="menu-item-price">
                             <span class="menu-item-price-content">
                                 <b>{{.Price}}</b>
-                                <span>$</span>
+                                <span></span>
                             </span>
                            </div>
                            <div class="order-action{{if ne .SelectedAmount 0}}-value{{end}}">

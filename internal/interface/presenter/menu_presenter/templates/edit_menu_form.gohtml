@@ -7,13 +7,13 @@
             <div class="base-modal-overlay"></div>
             <div class="base-modal-main">
                 <div class="base-modal-header">
-                    <h2>Edit menu info</h2>
+                    <h2>Редактировать меню</h2>
                 </div>
                 <div class="base-modal-body">
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label class="base-form-label required">
-                                <span class="base-form-label-name">Menu name</span>
+                                <span class="base-form-label-name">Название</span>
                                 <span class="base-form-input">
                                 <input type="text" name="name" class="base-form-input-input" value="{{.Name}}" required>
                             </span>
@@ -26,9 +26,7 @@
                             <label for="" class="base-form-checkbox">
                                 <input type="checkbox" name="is_visible" class="base-form-checkbox-input" {{if .IsVisible}}checked{{end}}>
                                 <i class="base-form-checkbox-button"></i>
-                                <span class="base-form-checkbox-text">
-                                Menu is visible
-                            </span>
+                                <span class="base-form-checkbox-text">Показывать меню</span>
                             </label>
                         </div>
                     </div>
@@ -36,8 +34,8 @@
                 </div>
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
-                        <button class="base-button base-button-secondary" id="close_edit_menu_dialog_{{.ID}}">Cancel</button>
-                        <button type="submit" class="base-button base-button-default" id="reset_edit_menu_dialog_{{.ID}}">Save</button>
+                        <button class="base-button base-button-secondary" id="close_edit_menu_dialog_{{.ID}}">Отменить</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_menu_dialog_{{.ID}}">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -57,13 +55,13 @@
             if (evt.detail.successful === true) {
                 document.getElementById("edit_menu_dialog_{{.ID}}").style.display = "none";
                 Snackbar.show({
-                    text: 'Operation done successfully',
-                    actionText: 'Close',
+                    text: 'Меню успешно отредактирован',
+                    actionText: 'Закрыть',
                 });
             } else {
                 Snackbar.show({
-                    text: 'There was an error, please check the correctness',
-                    actionText: 'Close',
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
                 });
             }
         })

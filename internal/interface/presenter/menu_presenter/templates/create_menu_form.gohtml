@@ -14,13 +14,13 @@
             <div class="base-modal-overlay"></div>
             <div class="base-modal-main">
                 <div class="base-modal-header">
-                    <h2>Create menu</h2>
+                    <h2>Создание меню</h2>
                 </div>
                 <div class="base-modal-body">
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label class="base-form-label required">
-                                <span class="base-form-label-name">Menu name</span>
+                                <span class="base-form-label-name">Название</span>
                                 <span class="base-form-input">
                                 <input type="text" name="name" class="base-form-input-input" required>
                             </span>
@@ -33,9 +33,7 @@
                             <label for="" class="base-form-checkbox">
                                 <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
                                 <i class="base-form-checkbox-button"></i>
-                                <span class="base-form-checkbox-text">
-                                Menu is visible
-                            </span>
+                                <span class="base-form-checkbox-text">Показывать меню</span>
                             </label>
                         </div>
                     </div>
@@ -43,8 +41,8 @@
                 </div>
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
-                        <button class="base-button base-button-secondary" id="close_create_menu_dialog_{{.OrderParam}}">Cancel</button>
-                        <button type="submit" class="base-button base-button-default" id="reset_create_menu_dialog_{{.OrderParam}}">Save</button>
+                        <button class="base-button base-button-secondary" id="close_create_menu_dialog_{{.OrderParam}}">Закрыть</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_menu_dialog_{{.OrderParam}}">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -67,13 +65,13 @@
                     document.getElementById("create_menu_dialog_{{.OrderParam}}").style.display = "none";
                 }, 10)
                 Snackbar.show({
-                    text: 'Operation done successfully',
-                    actionText: 'Close',
+                    text: 'Меню создан успешно',
+                    actionText: 'Закрыть',
                 });
             } else {
                 Snackbar.show({
-                    text: 'There was an error, please check the correctness',
-                    actionText: 'Close',
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
                 });
             }
         })

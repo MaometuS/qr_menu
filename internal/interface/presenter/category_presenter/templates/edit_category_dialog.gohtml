@@ -12,13 +12,13 @@
             <div class="base-modal-overlay"></div>
             <div class="base-modal-main">
                 <div class="base-modal-header">
-                    <h2>Edit category info</h2>
+                    <h2>Редактировать категорию</h2>
                 </div>
                 <div class="base-modal-body">
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label class="base-form-label required">
-                                <span class="base-form-label-name">Category name</span>
+                                <span class="base-form-label-name">Название</span>
                                 <span class="base-form-input">
                                 <input type="text" name="name" value="{{.Name}}" class="base-form-input-input" required>
                             </span>
@@ -31,9 +31,7 @@
                             <label for="" class="base-form-checkbox">
                                 <input type="checkbox" name="is_visible" class="base-form-checkbox-input" {{if .IsVisible}}checked{{end}}>
                                 <i class="base-form-checkbox-button"></i>
-                                <span class="base-form-checkbox-text">
-                                Category is visible
-                            </span>
+                                <span class="base-form-checkbox-text">Показывать категорию</span>
                             </label>
                         </div>
                     </div>
@@ -41,7 +39,7 @@
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label for="" class="base-form-label">
-                                <span class="base-form-label-name">Category image</span>
+                                <span class="base-form-label-name">Изображение</span>
                                 <input type="file" name="background" class="custom-image-picker" accept="image/*" required>
                             </label>
                         </div>
@@ -50,8 +48,8 @@
                 </div>
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
-                        <button class="base-button base-button-secondary" id="close_edit_category_dialog_{{.OrderParam}}">Cancel</button>
-                        <button type="submit" class="base-button base-button-default" id="reset_edit_category_form_{{.OrderParam}}">Save</button>
+                        <button class="base-button base-button-secondary" id="close_edit_category_dialog_{{.OrderParam}}">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_category_form_{{.OrderParam}}">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -74,13 +72,13 @@
                     document.getElementById("edit_category_dialog_{{.OrderParam}}").style.display = "none";
                 }, 10);
                 Snackbar.show({
-                    text: 'Operation done successfully',
-                    actionText: 'Close',
+                    text: 'Создание успешно',
+                    actionText: 'Закрыть',
                 });
             } else {
                 Snackbar.show({
-                    text: 'There was an error, please check the correctness',
-                    actionText: 'Close',
+                    text: 'Произошла ошибка, пожалуйста проверьте правилность введенных данных',
+                    actionText: 'Закрыть',
                 });
             }
         });

@@ -3,20 +3,18 @@
         <div class="base-modal-overlay"></div>
         <div class="base-modal-main">
             <div class="base-modal-header">
-                <h2>Delete?</h2>
+                <h2>Удалить?</h2>
             </div>
             <div class="base-modal-footer">
                 <div class="crud-modal-footer">
-                    <button class="base-button base-button-secondary" id="close_delete_establishment_dialog_{{.}}">Cancel</button>
+                    <button class="base-button base-button-secondary" id="close_delete_establishment_dialog_{{.}}">Отмена</button>
                     <button
                             hx-delete="/admin/establishment?id={{.}}"
                             hx-trigger="click"
                             hx-target="#establishments_page"
                             hx-swap="outerHTML"
                             class="base-button base-button-default"
-                    >
-                        Delete
-                    </button>
+                    >Удалить</button>
                 </div>
             </div>
         </div>

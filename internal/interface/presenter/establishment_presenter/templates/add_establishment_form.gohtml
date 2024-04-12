@@ -9,13 +9,13 @@
             <div class="base-modal-overlay"></div>
             <div class="base-modal-main">
                 <div class="base-modal-header">
-                    <h2>Add establishment</h2>
+                    <h2>Добавить заведение</h2>
                 </div>
                 <div class="base-modal-body">
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label class="base-form-label required">
-                                <span class="base-form-label-name">Establishment name</span>
+                                <span class="base-form-label-name">Название</span>
                                 <span class="base-form-input">
                                 <input type="text" name="name" class="base-form-input-input" required>
                             </span>
@@ -26,7 +26,7 @@
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label class="base-form-label required">
-                                <span class="base-form-label-name">Short name in URL</span>
+                                <span class="base-form-label-name">Ссылка</span>
                                 <span class="base-form-input">
                                 <input
                                         type="text"
@@ -49,7 +49,7 @@
                     <div class="base-form-row-wr">
                         <div class="base-form-row">
                             <label for="" class="base-form-label required">
-                                <span class="base-form-label-name">Currency</span>
+                                <span class="base-form-label-name">Валюта</span>
                                 <select class="base-form-select" name="currency">
                                     {{range .}}
                                         <option value="{{.ID}}">{{.Name}}</option>
@@ -62,8 +62,8 @@
                 </div>
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
-                        <button class="base-button base-button-secondary" id="close_form_button">Cancel</button>
-                        <button type="submit" class="base-button base-button-default" id="create_establishment_button">Save</button>
+                        <button class="base-button base-button-secondary" id="close_form_button">Отменить</button>
+                        <button type="submit" class="base-button base-button-default" id="create_establishment_button">Сохранить</button>
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
 
         async function checkLink(event) {
             if (event.detail.xhr.responseText === "true") {
-                document.getElementById("establishment_link").setCustomValidity('Link already exists');
+                document.getElementById("establishment_link").setCustomValidity('Ссылка уже существует');
             } else {
                 document.getElementById("establishment_link").setCustomValidity('');
             }

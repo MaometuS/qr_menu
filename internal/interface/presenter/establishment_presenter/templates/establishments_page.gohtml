@@ -1,6 +1,6 @@
 {{define "establishments_page"}}
     <div class="admin-places admin-wrapper" id="establishments_page">
-        <h1 class="admin-places-title">Places</h1>
+        <h1 class="admin-places-title">Заведение</h1>
         <div class="admin-places-main">
             <div class="admin-places-list">
                 {{range .Establishments}}
@@ -12,13 +12,11 @@
                             oddmenu.com/p/{{.Link}}
                         </div>
                         <div class="place-card-buttons">
-                            <a href="/admin/e/{{.Link}}" class="base-button base-button-default">Edit menu</a>
+                            <a href="/admin/e/{{.Link}}" class="base-button base-button-default">Редактировать</a>
                             <button
                                     id="open_delete_establishment_dialog_{{.ID}}"
                                     class="base-button base-button-secondary"
-                            >
-                                Delete
-                            </button>
+                            >Удалить</button>
                         </div>
                     </div>
                     <script>
@@ -32,15 +30,13 @@
                     <span class="add-place-button-icon">
                         <img src="/assets/add_button.svg" alt="">
                     </span>
-                    <span class="add-place-button-title">
-                        Add establishment
-                    </span>
+                    <span class="add-place-button-title">Добавить заведение</span>
                 </button>
             </div>
-            <div class="admin-places-info">
-                <p>If you need help, please let us know.</p>
-                <p>Our <a href="#">contacts</a></p>
-            </div>
+{{/*            <div class="admin-places-info">*/}}
+{{/*                <p>If you need help, please let us know.</p>*/}}
+{{/*                <p>Our <a href="#">contacts</a></p>*/}}
+{{/*            </div>*/}}
         </div>
     </div>
     {{template "add_establishment_form" .Currencies}}
