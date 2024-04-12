@@ -1,0 +1,75 @@
+{{define "categories"}}
+<div class="cafe_list">
+    <div class="cafe_list-body">
+{{/*        <div class="search">*/}}
+{{/*            <div class="search-form">*/}}
+{{/*                <form action="#" class="search-form-field">*/}}
+{{/*                    <div class="search-form-input">*/}}
+{{/*                        <input type="text" placeholder="Search...">*/}}
+{{/*                    </div>*/}}
+{{/*                    <button class="search-form-button">*/}}
+{{/*                        <img src="/assets/search.svg" alt="">*/}}
+{{/*                    </button>*/}}
+{{/*                </form>*/}}
+{{/*            </div>*/}}
+{{/*        </div>*/}}
+        <div class="category_list">
+            <h2 style="margin-top: 20px;">ADD CATEGORY</h2>
+
+            {{template "add_category_dialog" dict "OrderParam" 1 "MenuID" .MenuID}}
+
+            {{range .Categories}}
+                <div class="category-list-item">
+                    <div class="category-item">
+                        <a
+                                hx-get="/admin/items?category_id={{.ID}}"
+                                hx-target="#main_body"
+                                class="category-item-link"
+                                style="background-image: url({{.Background}})"
+                        >
+                            <h2>{{.Name}}</h2>
+                        </a>
+                        <div class="category-item-admin-actions">
+                            {{if ne .OrderParam 1}}
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/category/move_up?id={{.ID}}&menu_id={{.MenuID}}"
+                                        hx-target="#main_body"
+                                >
+                                    <img src="/assets/up_category_action.svg" alt="">
+                                </button>
+                            {{end}}
+                            {{if ne .OrderParam (len $.Categories)}}
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/category/move_down?id={{.ID}}&menu_id={{.MenuID}}"
+                                        hx-target="#main_body"
+                                >
+                                    <img src="/assets/down_category_action.svg" alt="">
+                                </button>
+                            {{end}}
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    id="open_edit_category_dialog_{{.OrderParam}}"
+                            >
+                                <img src="/assets/edit_category_action.svg" alt="">
+                            </button>
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    hx-delete="/admin/category?id={{.ID}}&menu_id={{.MenuID}}"
+                                    hx-target="#main_body"
+                            >
+                                <img src="/assets/delete_category_action.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {{template "edit_category_dialog" .}}
+                {{template "add_category_dialog" dict "OrderParam" (add1 .OrderParam) "MenuID" .MenuID}}
+            {{end}}
+
+        </div>
+    </div>
+
+</div>
+{{end}}

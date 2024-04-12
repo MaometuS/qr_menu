@@ -1,0 +1,111 @@
+{{define "profile_page"}}
+    <div class="admin-wrapper">
+        <h1 class="admin-places-title">Profile</h1>
+        <div class="profile-data-main">
+            <div class="profile-data-card">
+                <form hx-post="/admin/name_edit/" hx-swap="none" hx-on:htmx:after-request="onNameChanged(event)">
+                    <div class="user-credentials-form">
+                        <h3 class="user-credentials-title">Данные пользователя</h3>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Имя</span>
+                                <span class="base-form-input">
+                                <input id="name" type="text" name="name" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">E-mail</span>
+                                <span class="base-form-input">
+                                <input id="email" type="email" name="email" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                        <button type="submit" class="base-button base-button-default" style="width: 130px">Save
+                            changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="profile-data-card">
+                <form hx-post="/admin/change_password/" hx-swap="none"
+                      hx-on:htmx:after-request="onPasswordChanged(event)" id="change_password_form">
+                    <div class="user-credentials-form">
+                        <h3 class="user-credentials-title">Изменить пароль</h3>
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Новый пароль</span>
+                                <span class="base-form-input">
+                                <input id="password" type="password" name="password" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Повторите пароль</span>
+                                <span class="base-form-input">
+                                <input
+                                        id="repeat_password"
+                                        type="password"
+                                        name="repeat_password"
+                                        class="base-form-input-input"
+                                        required
+                                        onkeyup="this.setCustomValidity('')"
+                                        hx-on:htmx:validation:validate="repeatPasswordValidation(event)"
+                                >
+                            </span>
+                            </label>
+                        </div>
+                        <button type="submit" class="base-button base-button-default" style="width: 150px">Изменить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="place-data-bottom">
+            <a href="/logout/" class="base-button base-button-secondary" style="width: 100px">Выход</a>
+        </div>
+    </div>
+    <script>
+        function onPasswordChanged(event) {
+            if (event.detail.successful === true) {
+                document.getElementById("change_password_form").reset();
+                Snackbar.show({
+                    text: 'Пароль изменен успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность данных!',
+                    actionText: 'Закрыть',
+                });
+            }
+        }
+
+        function onNameChanged(event) {
+            if (event.detail.successful === true) {
+                if (event.detail.xhr.responseText === "true") {
+                    window.location = "/admin/verify_email_edit?email=" + document.getElementById("email").value;
+                } else {
+                    document.getElementById("profile_name").innerText = document.getElementById("name").value;
+                    Snackbar.show({
+                        text: 'Имя изменено успешно',
+                        actionText: 'Закрыть',
+                    });
+                }
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность данных!',
+                    actionText: 'Закрыть',
+                });
+            }
+        }
+
+        function repeatPasswordValidation(event) {
+            if (document.getElementById("password").value !== document.getElementById("repeat_password").value) {
+                event.detail.elt.setCustomValidity("Пароли должный совпадать");
+            }
+            htmx.find("#change_password_form").reportValidity();
+        }
+    </script>
+{{end}}

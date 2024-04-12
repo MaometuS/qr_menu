@@ -1,0 +1,89 @@
+{{define "menus"}}
+    <div class="menu _admin">
+        <div class="menu-item">
+            {{template "create_menu_dialog" dict "OrderParam" 1 "EstablishmentID" .EstablishmentID}}
+        </div>
+        {{range .Menus}}
+            <div class="menu-item {{if eq .OrderParam 1}}_selected{{end}}" data-id="{{.ID}}">
+                <div class="menu-item-wrapper">
+                    <div
+                            class="menu-item-button"
+                            data-id="{{.ID}}"
+                            hx-get="/admin/categories?menu_id={{.ID}}"
+                            hx-trigger="click"
+                            hx-target="#main_body"
+                    >
+                    <span>{{.Name}}</span>
+                    </div>
+                    <div class="menu-admin-actions">
+                        <div class="item-admin-actions">
+                            {{if ne .OrderParam 1}}
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/menu/move_up?id={{.ID}}&establishment_id={{.EstablishmentID}}"
+                                        hx-target="#menu_list"
+                                >
+                                    <img src="/assets/left_menu_action.svg" alt="">
+                                </button>
+                            {{end}}
+                            {{if ne .OrderParam (len $.Menus)}}
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/menu/move_down?id={{.ID}}&establishment_id={{.EstablishmentID}}"
+                                        hx-target="#menu_list"
+                                >
+                                    <img src="/assets/right_menu_action.svg" alt="">
+                                </button>
+                            {{end}}
+                            <button class="icon-button item-admin-actions-item" id="open_edit_menu_dialog_{{.ID}}">
+                                <img src="/assets/edit_menu_action.svg" alt="">
+                            </button>
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    hx-delete="/admin/menu?id={{.ID}}&establishment_id={{.EstablishmentID}}"
+                                    hx-target="#menu_list"
+                            >
+                                <img src="/assets/delete_menu_action.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{template "create_menu_dialog" dict "OrderParam" (add1 .OrderParam) "EstablishmentID" .EstablishmentID}}
+            {{template "edit_menu_dialog" .}}
+        {{end}}
+    </div>
+    <script>
+        var selected;
+
+        Array.from(document.getElementsByClassName("menu-item")).forEach((el) => {
+            if (el.classList.contains("_selected")) {
+                selected = parseInt(el.getAttribute("data-id"));
+            }
+        })
+
+        function setSelected(id) {
+            Array.from(document.getElementsByClassName("menu-item")).forEach((el) => {
+                if (parseInt(el.getAttribute("data-id")) === id) {
+                    if (!el.classList.contains("_selected")) {
+                        el.classList.add("_selected");
+                    }
+                } else {
+                    if (el.classList.contains("_selected")) {
+                        el.classList.remove("_selected");
+                    }
+                }
+            })
+        }
+
+        htmx.onLoad(function () {
+            setSelected(selected);
+        })
+
+        Array.from(document.getElementsByClassName("menu-item-button")).forEach((el) => {
+            el.addEventListener("click", (evt) => {
+                selected = parseInt(el.getAttribute("data-id"));
+            })
+        })
+    </script>
+{{end}}

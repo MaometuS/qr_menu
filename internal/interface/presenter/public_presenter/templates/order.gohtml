@@ -1,0 +1,62 @@
+{{define "order"}}
+    <div class="order" selected-menu="[object Object]">
+        <div class="place-nav">
+            <div class="wrapper">
+                <button class="back-button" hx-get="/categories?menu_id={{.MenuID}}" hx-target="#main_body">
+                    <img src="/assets/back.svg" alt="">
+                </button>
+            </div>
+        </div>
+        <h2 class="h2">
+            <span>My order:</span>
+        </h2>
+        <div class="order-item-list">
+            {{range .Items}}
+                <div class="order-item" id="order_item_{{.ID}}">
+                    <div class="order-item-header">
+                        <h3 class="order-item-title">{{.Name}}</h3>
+                    </div>
+                    <div class="order-item-footer">
+                        <div class="order-item-price">
+                            <div class="menu-item-price small">
+                                <span class="menu-item-price-content">
+                                    <b>{{.Price}}</b> <span>$</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="order-item-count">
+                            <div class="order-action{{if ne .SelectedAmount 0}}-value{{end}}">
+                                <button
+                                        class="order-action-button remove"
+                                        hx-get="/order/remove?id={{.ID}}&menu_id={{$.MenuID}}"
+                                        hx-target="#main_body"
+                                >-</button>
+                                <div class="order-action-count">{{.SelectedAmount}}</div>
+                                <button
+                                        class="order-action-button add"
+                                        hx-get="/order/add?id={{.ID}}&menu_id={{$.MenuID}}"
+                                        hx-target="#main_body"
+                                >+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{end}}
+        </div>
+        <div class="order-total-price">
+            <span>Total: </span>
+            <div class="menu-item-price.regular">
+                <span class="menu-item-price-content">
+                    <b id="price_total">{{.Total}}</b><span>$</span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <script>
+        {{if .HasSelected}}
+        document.getElementById("show_order_button").style.display = "flex";
+        {{else}}
+        document.getElementById("show_order_button").style.display = "none";
+        {{end}}
+    </script>
+{{end}}

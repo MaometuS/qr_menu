@@ -1,0 +1,37 @@
+{{define "verify_email_edit_page"}}
+    <!doctype html>
+    <html lang="en">
+    {{template "head" "Верификация e-mail"}}
+    <body>
+        <form action="/admin/email_edit/" method="post">
+            <input type="hidden" name="email" value="{{.}}">
+            <div class="base-modal">
+                <div class="base-modal-overlay"></div>
+                <div class="base-modal-main">
+                    <div class="base-modal-header">
+                        <h2>Регистрация</h2>
+                    </div>
+                    <div class="base-modal-body">
+                        <div class="base-form-row-wr">
+                            <div class="base-form-row">
+                                <label class="base-form-label required">
+                                    <span class="base-form-label-name">Код</span>
+                                    <span class="base-form-input">
+                                            <input type="text" name="code" class="base-form-input-input">
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="base-modal-footer">
+                        <div class="crud-modal-footer">
+                            <a href="/admin/verify_email_edit?email={{.}}" class="base-button base-button-secondary">Отправить код заново</a>
+                            <button type="submit" class="base-button base-button-default">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+    </html>
+{{end}}

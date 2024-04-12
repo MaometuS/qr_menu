@@ -1,0 +1,96 @@
+{{define "items"}}
+   <div class="menu-page">
+       <div class="place-nav">
+           <div class="wrapper">
+               <button class="back-button" hx-get="/admin/categories?menu_id={{.MenuID}}" hx-target="#main_body">
+                   <img src="/assets/back.svg" alt="">
+               </button>
+           </div>
+       </div>
+       <section class="menu-item-list">
+           <h2 class="menu-item-list-title" style="justify-content:center;">
+               <span>ADD ITEMS</span>
+{{/*               <button class="icon-button">*/}}
+{{/*                   <img src="/assets/pen.svg" alt="">*/}}
+{{/*               </button>*/}}
+           </h2>
+
+           {{template "add_item_dialog" dict "OrderParam" 1 "CategoryID" .CategoryID}}
+
+           {{range .Items}}
+               <div class="menu-list-item">
+                   <article class="menu-item">
+                       <div class="menu-item-image">
+                           <img src="{{.Image}}" alt="">
+                       </div>
+                       <div class="menu-item-content">
+                           <div class="menu-item-body">
+                               <div class="menu-item-header">
+                                   <h3 class="menu-item-title">
+                                       {{.Name}}
+                                   </h3>
+                                   <div class="menu-item-weight">
+                                       {{.Weight}}
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="menu-item-footer">
+                           <div class="menu-item-price">
+                            <span class="menu-item-price-content">
+                                <b>{{.Price}}</b>
+                                <span>$</span>
+                            </span>
+                           </div>
+                           <div class="order-action">
+                               <button class="order-action-button remove">-</button>
+                               <div class="order-action-count">0</div>
+                               <button class="order-action-button add">+</button>
+                           </div>
+                       </div>
+                       <div class="menu-item-action">
+                           <div class="menu-item-admin-actions">
+                               <div class="item-admin-actions">
+                                   {{if ne .OrderParam 1}}
+                                       <button
+                                               class="icon-button item-admin-actions-item"
+                                               hx-patch="/admin/item/move_up?id={{.ID}}&category_id={{.CategoryID}}"
+                                               hx-target="#main_body"
+                                       >
+                                           <img src="/assets/up_category_action.svg" alt="">
+                                       </button>
+                                   {{end}}
+                                   {{if ne .OrderParam (len $.Items)}}
+                                       <button
+                                               class="icon-button item-admin-actions-item"
+                                               hx-patch="/admin/item/move_down?id={{.ID}}&category_id={{.CategoryID}}"
+                                               hx-target="#main_body"
+                                       >
+                                           <img src="/assets/down_category_action.svg" alt="">
+                                       </button>
+                                   {{end}}
+                                   <button
+                                           class="icon-button item-admin-actions-item"
+                                           id="open_edit_item_dialog_{{.OrderParam}}"
+                                   >
+                                       <img src="/assets/edit_category_action.svg" alt="">
+                                   </button>
+                                   <button
+                                           class="icon-button item-admin-actions-item"
+                                           hx-delete="/admin/item?id={{.ID}}&category_id={{.CategoryID}}"
+                                           hx-target="#main_body"
+                                   >
+                                       <img src="/assets/delete_category_action.svg" alt="">
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                   </article>
+               </div>
+
+               {{template "edit_item_dialog" .}}
+               {{template "add_item_dialog" dict "OrderParam" (add1 .OrderParam) "CategoryID" .CategoryID}}
+           {{end}}
+       </section>
+   </div>
+{{end}}

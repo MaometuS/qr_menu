@@ -1,0 +1,77 @@
+{{define "main_page"}}
+    <!doctype html>
+    <html lang="en">
+    {{template "head" .Establishment}}
+    <body class="body">
+    <div class="page">
+        <div class="page-head" style="background: url({{.Establishment.Background}})"></div>
+        <div class="page-content">
+            <h1 class="page-title">{{.Establishment.Name}}</h1>
+            <div class="page-info">
+                <div class="page-info_block_container">
+                    {{if ne .Establishment.Address ""}}
+                    <div class="page-info_block">
+                        <img src="/assets/location.svg" alt="">
+                        <a href="#">{{.Establishment.Address}}</a>
+                    </div>
+                    {{end}}
+                    {{if ne .Establishment.Phone ""}}
+                    <div class="page-info_block">
+                        <img src="/assets/phone.svg" alt="">
+                        <a href="#">{{.Establishment.Phone}}</a>
+                    </div>
+                    {{end}}
+                    {{if ne .Establishment.WifiPassword ""}}
+                    <div class="page-info_block">
+                        <img src="/assets/wifi.svg" alt="">
+                        <a href="#">{{.Establishment.WifiPassword}}</a>
+                    </div>
+                    {{end}}
+                </div>
+                {{if ne .Establishment.Text ""}}
+                <div class="page-info-description">
+                    <p>{{.Establishment.Text}}</p>
+                </div>
+                {{end}}
+            </div>
+            <div class="page-main">
+                <div class="menu">
+                    {{range .Menus}}
+                        {{if .IsVisible}}
+                            <div class="menu-item {{if eq .OrderParam 1}}_selected{{end}}" data-id="{{.ID}}">
+                                <div class="menu-item-button" hx-get="/categories?menu_id={{.ID}}" hx-target="#main_body">
+                                    <span>{{.Name}}</span>
+                                </div>
+                            </div>
+                        {{end}}
+                    {{end}}
+                </div>
+                <div id="main_body" hx-get="/categories?menu_id={{.MenuID}}" hx-trigger="load"></div>
+                <a
+                        hx-get="/order?menu_id={{.MenuID}}"
+                        hx-target="#main_body"
+                        class="place-order"
+                        id="show_order_button"
+                        style="display: {{if .HasSelected}}flex{{else}}none{{end}}"
+                >
+                    Show my order
+                </a>
+            </div>
+            <div class="page_content-footer">
+                <a href="#">qrmenu</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        Array.from(document.getElementsByClassName("menu-item")).forEach((e) => {
+            e.onclick = (evt) => {
+                let id = e.getAttribute("data-id");
+                document.getElementById("show_order_button").setAttribute("hx-get", "/order?id="+id);
+                Array.from(document.getElementsByClassName("menu-item")).forEach((ee) => ee.classList.remove("_selected"));
+                e.classList.add("_selected");
+            };
+        });
+    </script>
+    </body>
+    </html>
+{{end}}

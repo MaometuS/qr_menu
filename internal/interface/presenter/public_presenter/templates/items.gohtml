@@ -1,0 +1,63 @@
+{{define "items"}}
+   <div class="menu-page">
+       <div class="place-nav">
+           <div class="wrapper">
+               <button class="back-button" hx-get="/categories?menu_id={{.MenuID}}" hx-target="#main_body">
+                   <img src="/assets/back.svg" alt="">
+               </button>
+           </div>
+       </div>
+       <section class="menu-item-list">
+           <h2 class="menu-item-list-title">
+               {{.Category}}
+           </h2>
+           {{range .Items}}
+               {{if .IsVisible}}
+                   <div class="menu-list-item" id="item_{{.ID}}">
+                       <article class="menu-item">
+                           <div class="menu-item-image">
+                               <img src="{{.Image}}" alt="">
+                           </div>
+                           <div class="menu-item-content">
+                               <div class="menu-item-body">
+                                   <div class="menu-item-header">
+                                       <h3 class="menu-item-title">{{.Name}}</h3>
+                                       <div class="menu-item-weight">{{.Weight}}</div>
+                                   </div>
+                                   <div class="menu-item-description">
+                                       <p>{{.AdditionalInfo}}</p>
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="menu-item-footer">
+                               <div class="menu-item-price">
+                                <span class="menu-item-price-content">
+                                    <b>{{.Price}}</b>
+                                    <span>$</span>
+                                </span>
+                               </div>
+                               {{if .IsAvailable}}
+                                   <div class="order-action{{if ne .SelectedAmount 0}}-value{{end}}">
+                                       <button
+                                               class="order-action-button remove"
+                                               hx-get="/item/remove?id={{.ID}}"
+                                               hx-target="#item_{{.ID}}"
+                                               hx-swap="outerHTML"
+                                       >-</button>
+                                       <div class="order-action-count">{{.SelectedAmount}}</div>
+                                       <button
+                                               class="order-action-button add"
+                                               hx-get="/item/add?id={{.ID}}"
+                                               hx-target="#item_{{.ID}}"
+                                               hx-swap="outerHTML"
+                                       >+</button>
+                                   </div>
+                               {{end}}
+                           </div>
+                       </article>
+                   </div>
+               {{end}}
+           {{end}}
+       </section>
+   </div>
+{{end}}

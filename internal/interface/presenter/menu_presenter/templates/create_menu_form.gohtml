@@ -1,0 +1,81 @@
+{{define "create_menu_dialog"}}
+    <div class="menu-item">
+        <button class="icon-button admin-item-add-button" id="open_create_menu_dialog_{{.OrderParam}}">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+    <div class="base-modal" id="create_menu_dialog_{{.OrderParam}}" style="display: none">
+        <form hx-post="/admin/menu/"
+              hx-target="#menu_list"
+              id="create_menu_dialog_form_{{.OrderParam}}"
+        >
+            <input type="hidden" name="order" value="{{.OrderParam}}">
+            <input type="hidden" name="establishment_id" value="{{.EstablishmentID}}">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Create menu</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Menu name</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">
+                                Menu is visible
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_create_menu_dialog_{{.OrderParam}}">Cancel</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_menu_dialog_{{.OrderParam}}">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("close_create_menu_dialog_{{.OrderParam}}").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("create_menu_dialog_{{.OrderParam}}").style.display = "none";
+        })
+
+        document.getElementById("open_create_menu_dialog_{{.OrderParam}}").addEventListener("click", function () {
+            document.getElementById("create_menu_dialog_{{.OrderParam}}").style.display = "flex";
+        })
+
+        document.getElementById("create_menu_dialog_form_{{.OrderParam}}").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("create_menu_dialog_form_{{.OrderParam}}").reset();
+                    document.getElementById("create_menu_dialog_{{.OrderParam}}").style.display = "none";
+                }, 10)
+                Snackbar.show({
+                    text: 'Operation done successfully',
+                    actionText: 'Close',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'There was an error, please check the correctness',
+                    actionText: 'Close',
+                });
+            }
+        })
+    </script>
+{{end}}

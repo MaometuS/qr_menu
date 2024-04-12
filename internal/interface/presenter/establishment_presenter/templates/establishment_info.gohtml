@@ -1,0 +1,48 @@
+{{define "establishment_info"}}
+    <h1 class="page-title">
+        <span>{{.E.Name}}</span>
+        <button class="icon-button" id="open_edit_establishment_dialog">
+            <img src="/assets/pen.svg" alt="">
+        </button>
+        <a href="/admin/establishment/qrcode?id={{.E.ID}}" download class="icon-button">
+            <img src="/assets/qr-code.png" alt="" style="height: 22px; width: 22px;">
+        </a>
+    </h1>
+    <div class="page-info">
+        <div class="page-info_block_container">
+            {{if ne .E.Address ""}}
+                <div class="page-info_block">
+                    <img src="/assets/location.svg" alt="">
+                    <a href="#">{{.E.Address}}</a>
+                </div>
+            {{end}}
+            {{if ne .E.Phone ""}}
+                <div class="page-info_block">
+                    <img src="/assets/phone.svg" alt="">
+                    <a href="#">{{.E.Phone}}</a>
+                </div>
+            {{end}}
+            {{if ne .E.WifiPassword ""}}
+                <div class="page-info_block">
+                    <img src="/assets/wifi.svg" alt="">
+                    <a href="#">{{.E.WifiPassword}}</a>
+                </div>
+            {{end}}
+        </div>
+        {{if ne .E.Text ""}}
+            <div class="page-info-description">
+                <p>{{.E.Text}}</p>
+            </div>
+        {{end}}
+    </div>
+    <script>
+        document.getElementById("title").innerText = "{{.E.Name}}";
+        {{if ne .E.Logo ""}}
+        document.getElementById("favicon").href = "{{.E.Logo}}";
+        {{end}}
+        {{if ne .E.Background ""}}
+        document.getElementById("page_head").style.background = "url({{.E.Background}})";
+        {{end}}
+    </script>
+    {{template "edit_establishment_dialog" .}}
+{{end}}

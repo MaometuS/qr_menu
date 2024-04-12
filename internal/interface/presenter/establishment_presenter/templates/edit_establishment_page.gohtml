@@ -1,0 +1,62 @@
+{{define "edit_establishment_page"}}
+    <!doctype html>
+    <html lang="en">
+    {{template "head" .}}
+    <body class="body">
+    <div class="page">
+        <div id="page_head" class="page-head"></div>
+        <div class="page-content">
+            <div
+                    id="establishment_info"
+                    hx-get="/admin/establishment/info?id={{.Establishment.ID}}"
+                    hx-trigger="load"
+            ></div>
+            <div class="page-main">
+                <div id="menu_list" hx-get="/admin/menus?establishment_id={{.Establishment.ID}}" hx-trigger="load"></div>
+                <div id="main_body" hx-get="/admin/categories?menu_id={{.TopMenuID}}" hx-trigger="load"></div>
+
+{{/*                <div class="cafe_list">*/}}
+{{/*                    <div class="cafe_list-body">*/}}
+{{/*                        <div class="search">*/}}
+{{/*                            <div class="search-form">*/}}
+{{/*                                <form action="#" class="search-form-field">*/}}
+{{/*                                    <div class="search-form-input">*/}}
+{{/*                                        <input type="text" placeholder="Search...">*/}}
+{{/*                                    </div>*/}}
+{{/*                                    <button class="search-form-button">*/}}
+{{/*                                        <img src="/assets/search.svg" alt="">*/}}
+{{/*                                    </button>*/}}
+{{/*                                </form>*/}}
+{{/*                            </div>*/}}
+{{/*                        </div>*/}}
+{{/*                        <div class="category_list"></div>*/}}
+{{/*                    </div>*/}}
+{{/*                </div>*/}}
+            </div>
+            <div class="page_content-footer">
+                <a href="#">qrmenu</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        htmx.onLoad(function (content) {
+            Array.from(content.getElementsByClassName("base-form-checkbox")).forEach((el) => {
+                el.onclick = function () {
+                    if (el.firstElementChild.hasAttribute("checked")) {
+                        el.firstElementChild.removeAttribute("checked");
+                    } else {
+                        el.firstElementChild.setAttribute("checked", "");
+                    }
+                };
+            });
+
+            Array.from(content.getElementsByClassName("image-picker")).forEach((el) => {
+                el.onclick = function () {
+                    el.firstElementChild.children.item(1).click();
+                };
+            });
+        })
+    </script>
+    </body>
+    </html>
+{{end}}

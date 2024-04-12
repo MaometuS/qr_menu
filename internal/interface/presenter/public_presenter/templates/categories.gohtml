@@ -1,0 +1,38 @@
+{{define "categories"}}
+<div class="cafe_list">
+    <div class="cafe_list-body">
+        <div class="search">
+            <div class="search-form">
+                <form hx-get="/search/" hx-target="#main_body" class="search-form-field">
+                    <input type="hidden" name="establishment" value="{{.EstablishmentID}}">
+                    <input type="hidden" name="menu" value="{{.MenuID}}">
+                    <div class="search-form-input">
+                        <input type="text" name="search" placeholder="Search...">
+                    </div>
+                    <button type="submit" class="search-form-button">
+                        <img src="/assets/search.svg" alt="">
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="category_list">
+            {{range .Categories}}
+                {{if .IsVisible}}
+                    <div class="category-list-item">
+                        <div class="category-item">
+                            <a
+                                    hx-get="/items?category_id={{.ID}}"
+                                    hx-target="#main_body"
+                                    class="category-item-link"
+                                    style="background-image: url({{.Background}})"
+                            >
+                                <h2>{{.Name}}</h2>
+                            </a>
+                        </div>
+                    </div>
+                {{end}}
+            {{end}}
+        </div>
+    </div>
+</div>
+{{end}}

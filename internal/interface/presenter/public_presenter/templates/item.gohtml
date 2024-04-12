@@ -1,0 +1,52 @@
+{{define "item"}}
+    <div class="menu-list-item" id="item_{{.I.ID}}">
+        <article class="menu-item">
+            <div class="menu-item-image">
+                <img src="{{.I.Image}}" alt="">
+            </div>
+            <div class="menu-item-content">
+                <div class="menu-item-body">
+                    <div class="menu-item-header">
+                        <h3 class="menu-item-title">{{.I.Name}}</h3>
+                        <div class="menu-item-weight">{{.I.Weight}}</div>
+                    </div>
+                    <div class="menu-item-description">
+                        <p>{{.I.AdditionalInfo}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item-footer">
+                <div class="menu-item-price">
+                                    <span class="menu-item-price-content">
+                                        <b>{{.I.Price}}</b>
+                                        <span>$</span>
+                                    </span>
+                </div>
+                {{if .I.IsAvailable}}
+                    <div class="order-action{{if ne .I.SelectedAmount 0}}-value{{end}}">
+                        <button
+                                class="order-action-button remove"
+                                hx-get="/item/remove?id={{.I.ID}}"
+                                hx-target="#item_{{.I.ID}}"
+                                hx-swap="outerHTML"
+                        >-</button>
+                        <div class="order-action-count">{{.I.SelectedAmount}}</div>
+                        <button
+                                class="order-action-button add"
+                                hx-get="/item/add?id={{.I.ID}}"
+                                hx-target="#item_{{.I.ID}}"
+                                hx-swap="outerHTML"
+                        >+</button>
+                    </div>
+                {{end}}
+            </div>
+        </article>
+        <script>
+            {{if .HasSelected}}
+                document.getElementById("show_order_button").style.display = "flex";
+            {{else}}
+                document.getElementById("show_order_button").style.display = "none";
+            {{end}}
+        </script>
+    </div>
+{{end}}

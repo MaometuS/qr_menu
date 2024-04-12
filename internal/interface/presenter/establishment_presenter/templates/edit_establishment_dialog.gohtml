@@ -1,0 +1,172 @@
+{{define "edit_establishment_dialog"}}
+    <div class="base-modal" id="edit_establishment_dialog" style="display: none">
+        <form
+                hx-patch="/admin/establishment/"
+                hx-target="#establishment_info"
+                id="edit_establishment_form"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="id" value="{{.E.ID}}">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Edit establishment info</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Establishment name</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" value="{{.E.Name}}" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label required">
+                                <span class="base-form-label-name">Currency</span>
+                                <select class="base-form-select" name="currency" required>
+                                    {{range .Currencies}}
+                                        <option {{if eq .ID $.E.CurrencyID}}selected{{end}} value="{{.ID}}">{{.Name}}</option>
+                                    {{end}}
+                                </select>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Phone</span>
+                                <span class="base-form-input">
+                                    <input type="text" name="phone" value="{{.E.Phone}}" class="base-form-input-input">
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Logo</span>
+                                <input type="file" name="logo" accept="image/*" class="custom-image-picker">
+                            </label>
+{{/*                            <div class="image-picker">*/}}
+{{/*                                <div class="image-picker-dropzone">*/}}
+{{/*                                    <div class="image-picker-dropzone-text">Upload logo</div>*/}}
+{{/*                                    <input type="file" name="logo" class="image-picker-dropzone-input">*/}}
+{{/*                                    <div class="image-picker-dropzone-overlay"></div>*/}}
+{{/*                                </div>*/}}
+{{/*                            </div>*/}}
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Background</span>
+                                <input type="file" name="logo" accept="image/*" class="custom-image-picker">
+                            </label>
+{{/*                            <div class="image-picker">*/}}
+{{/*                                <div class="image-picker-dropzone">*/}}
+{{/*                                    <div class="image-picker-dropzone-text">Upload background</div>*/}}
+{{/*                                    <input type="file" name="background" class="image-picker-dropzone-input">*/}}
+{{/*                                    <div class="image-picker-dropzone-overlay"></div>*/}}
+{{/*                                </div>*/}}
+{{/*                            </div>*/}}
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">WiFi password</span>
+                                <span class="base-form-input">
+                                <input type="text" name="wifi_password" value="{{.E.WifiPassword}}" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="can_make_orders" {{if .E.CanMakeOrders}}checked{{end}}>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">
+                                Guests can make orders
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Country</span>
+                                <span class="base-form-input">
+                                <input type="text" name="country" value="{{.E.Country}}" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">City</span>
+                                <span class="base-form-input">
+                                <input type="text" name="city" value="{{.E.City}}" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Address</span>
+                                <span class="base-form-input">
+                                <input type="text" name="address" value="{{.E.Address}}" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Additional info</span>
+                                <span class="base-form-input">
+                                <textarea class="base-form-input-input" name="additional_info">{{.E.Text}}</textarea>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_edit_establishment_dialog">Cancel</button>
+                        <button type="submit" class="base-button base-button-default" id="save_edit_establishment_dialog">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_edit_establishment_dialog").addEventListener("click", function () {
+            document.getElementById("edit_establishment_dialog").style.display = "flex";
+        });
+
+        document.getElementById("close_edit_establishment_dialog").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("edit_establishment_dialog").style.display = "none";
+        });
+
+        document.getElementById("edit_establishment_form").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                document.getElementById("edit_establishment_dialog").style.display = "none";
+                Snackbar.show({
+                    text: 'Operation done successfully',
+                    actionText: 'Close',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'There was an error, please check the correctness',
+                    actionText: 'Close',
+                });
+            }
+        });
+    </script>
+{{end}}

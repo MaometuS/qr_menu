@@ -1,0 +1,201 @@
+{{define "add_item_dialog"}}
+    <div class="menu-list-item">
+        <button class="icon-button admin-item-add-button" id="open_add_item_dialog_{{.OrderParam}}">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+
+    <div class="base-modal" style="display: none" id="add_item_dialog_{{.OrderParam}}">
+        <form
+                id="add_item_form_{{.OrderParam}}"
+                hx-post="/admin/item/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="order_param" value="{{.OrderParam}}">
+            <input type="hidden" name="category_id" value="{{.CategoryID}}">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Add item</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Item name</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Weight</span>
+                                <span class="base-form-input">
+                                <input type="text" name="weight" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Price</span>
+                                <span class="base-form-input">
+                                <input type="text" name="price" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    {{/*                <div class="base-form-row-wr">*/}}
+                    {{/*                    <div class="base-form-row">*/}}
+                    {{/*                        <label class="base-form-label required">*/}}
+                    {{/*                            <span class="base-form-label-name">Variant 1</span>*/}}
+                    {{/*                            <span class="base-form-input">*/}}
+                    {{/*                                <input type="text" class="base-form-input-input">*/}}
+                    {{/*                            </span>*/}}
+                    {{/*                        </label>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                    <div class="base-form-row row-6">*/}}
+                    {{/*                        <label class="base-form-label required">*/}}
+                    {{/*                            <span class="base-form-label-name">Price</span>*/}}
+                    {{/*                            <span class="base-form-input">*/}}
+                    {{/*                                <input type="text" class="base-form-input-input">*/}}
+                    {{/*                            </span>*/}}
+                    {{/*                        </label>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                    <div class="base-form-row row-4">*/}}
+                    {{/*                        <button class="base-button base-button-secondary">Remove</button>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                </div>*/}}
+
+                    {{/*                <div class="base-form-row-wr">*/}}
+                    {{/*                    <div class="base-form-row">*/}}
+                    {{/*                        <label class="base-form-label required">*/}}
+                    {{/*                            <span class="base-form-label-name">Variant 2</span>*/}}
+                    {{/*                            <span class="base-form-input">*/}}
+                    {{/*                                <input type="text" class="base-form-input-input">*/}}
+                    {{/*                            </span>*/}}
+                    {{/*                        </label>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                    <div class="base-form-row row-6">*/}}
+                    {{/*                        <label class="base-form-label required">*/}}
+                    {{/*                            <span class="base-form-label-name">Price</span>*/}}
+                    {{/*                            <span class="base-form-input">*/}}
+                    {{/*                                <input type="text" class="base-form-input-input">*/}}
+                    {{/*                            </span>*/}}
+                    {{/*                        </label>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                    <div class="base-form-row row-4">*/}}
+                    {{/*                        <button class="base-button base-button-secondary">Remove</button>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                </div>*/}}
+
+                    {{/*                <div class="base-form-row-wr">*/}}
+                    {{/*                    <div class="base-form-row">*/}}
+                    {{/*                        <button class="base-button base-button-secondary" style="width: 100%">Add variant</button>*/}}
+                    {{/*                    </div>*/}}
+                    {{/*                </div>*/}}
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Additional info</span>
+                                <span class="base-form-input">
+                                <textarea class="base-form-input-input" name="additional_info"></textarea>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Item image</span>
+                                <input type="file" name="image" class="custom-image-picker" accept="image/*" required>
+                            </label>
+{{/*                            <div class="image-picker" style="height: auto; aspect-ratio: 1.61 / 1;">*/}}
+{{/*                                <div class="image-picker-dropzone">*/}}
+{{/*                                    <div class="image-picker-dropzone-text">Upload image</div>*/}}
+{{/*                                    <input type="file" class="image-picker-dropzone-input" name="image" required>*/}}
+{{/*                                    <div class="image-picker-dropzone-overlay"></div>*/}}
+{{/*                                </div>*/}}
+{{/*                            </div>*/}}
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_visible">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">
+                                Item is visible
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_available">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">
+                                Item is available
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+{{/*                    <div class="base-form-row-wr">*/}}
+{{/*                        <div class="base-form-row">*/}}
+{{/*                            <label for="" class="base-form-label required">*/}}
+{{/*                                <span class="base-form-label-name">Category</span>*/}}
+{{/*                                <select class="base-form-select">*/}}
+{{/*                                    <option value="DZD">Algerian dinar (دينار جزائري, دج)</option>*/}}
+{{/*                                    <option value="ARS">Argentine peso (Peso argentino, $)</option>*/}}
+{{/*                                    <option value="AMD">Armenian dram (Հայկական Դրամ, ֏)</option>*/}}
+{{/*                                </select>*/}}
+{{/*                            </label>*/}}
+{{/*                        </div>*/}}
+{{/*                    </div>*/}}
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_add_item_dialog_{{.OrderParam}}">Cancel</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_add_item_form_{{.OrderParam}}">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_add_item_dialog_{{.OrderParam}}").addEventListener("click", function () {
+            document.getElementById("add_item_dialog_{{.OrderParam}}").style.display = "flex";
+        });
+
+        document.getElementById("close_add_item_dialog_{{.OrderParam}}").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("add_item_dialog_{{.OrderParam}}").style.display = "none";
+        });
+
+        document.getElementById("add_item_form_{{.OrderParam}}").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("add_item_form_{{.OrderParam}}").reset();
+                    document.getElementById("add_item_dialog_{{.OrderParam}}").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Operation done successfully',
+                    actionText: 'Close',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'There was an error, please check the correctness',
+                    actionText: 'Close',
+                });
+            }
+        });
+    </script>
+{{end}}

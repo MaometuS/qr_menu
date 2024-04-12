@@ -1,0 +1,69 @@
+{{define "register_page"}}
+    <!doctype html>
+    <html lang="en">
+    {{template "head" "Регистрация"}}
+    <body>
+        <form action="/register/" method="post">
+            <div class="base-modal">
+                <div class="base-modal-overlay"></div>
+                <div class="base-modal-main">
+                    <div class="base-modal-header">
+                        <h2>Регистрация</h2>
+                    </div>
+                    <div class="base-modal-body">
+                        <div class="base-form-row-wr">
+                            <div class="base-form-row">
+                                <label class="base-form-label required">
+                                    <span class="base-form-label-name">Имя</span>
+                                    <span class="base-form-input">
+                                        <input type="text" name="name" class="base-form-input-input">
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="base-form-row-wr">
+                            <div class="base-form-row">
+                                <label class="base-form-label required">
+                                    <span class="base-form-label-name">E-mail</span>
+                                    <span class="base-form-input">
+                                        <input type="email" name="email" class="base-form-input-input">
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="base-form-row-wr">
+                            <div class="base-form-row">
+                                <label class="base-form-label required">
+                                    <span class="base-form-label-name">Пароль</span>
+                                    <span class="base-form-input">
+                                        <input type="password" name="password" class="base-form-input-input">
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="base-form-row-wr">
+                            <div class="base-form-row">
+                                <label class="base-form-label required">
+                                    <span class="base-form-label-name">Повторите пароль</span>
+                                    <span class="base-form-input">
+                                        <input type="password" name="password_repeat" class="base-form-input-input">
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="base-modal-footer">
+                        <div class="crud-modal-footer">
+                            <button type="submit" class="base-button base-button-default">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </body>
+    </html>
+{{end}}

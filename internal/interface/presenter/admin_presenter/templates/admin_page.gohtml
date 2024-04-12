@@ -1,0 +1,77 @@
+{{define "admin_page"}}
+    <!doctype html>
+    <html lang="en">
+    {{template "head" "Администраторская панель"}}
+    <body>
+        <div class="admin-layout">
+            <div class="admin-layout-header">
+                <div class="admin-layout-header-wrapper">
+                    <div class="admin-layout-header-wrapper">
+                        <a href="#" class="admin-logo">
+                            <b>QrMenu</b>
+                        </a>
+                    </div>
+                    <div class="admin-layout-header-actions">
+                        <a href="/admin/" class="admin-header-action-link">
+                            <img src="/assets/profile.svg" alt="">
+                            <span id="profile_name">{{.Name}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-layout-content">
+                <div class="admin-layout-body">
+                    <div class="admin-layout-body-wrapper">
+                        <div class="admin-sidebar admin-wrapper">
+                            <nav>
+                                <a hx-get="/admin/establishments?id={{.ID}}" hx-target="#main_body" class="admin-sidebar-nav-button active">
+                                    <img src="/assets/admin_sidebar_menu.svg" alt="">
+                                    <span>Заведения</span>
+                                </a>
+                                <a hx-get="/admin/profile?id={{.ID}}" hx-target="#main_body" class="admin-sidebar-nav-button">
+                                    <img src="/assets/admin_sidebar_profile.svg" alt="">
+                                    <span>Профиль</span>
+                                </a>
+                            </nav>
+                        </div>
+                        <div id="main_body" hx-get="/admin/establishments?id={{.ID}}" hx-trigger="load"></div>
+                    </div>
+                </div>
+                <div class="admin-layout-footer">
+                    <div class="admin-layout-footer-wrapper">
+                        <div class="admin-layout-footer-left">
+                            <div class="admin-footer-logo">
+                                <a href="#" class="logo">
+                                    <b>QrMenu</b>
+                                </a>
+                            </div>
+                            <div class="admin-footer-link">
+                                <a href="#">Правила обслуживания</a>
+                            </div>
+                            <div class="admin-footer-copy">
+                                © 2024 Все права защищены
+                            </div>
+                        </div>
+                        <div class="admin-layout-footer-right">
+                            <a href="#" class="admin-footer-contacts">Контакты</a>
+                            <a href="#" class="admin-footer-email">
+                                <img src="/assets/email.svg" alt="">
+                                <span>hello</span>
+                                "@qrmenu.uz"
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            Array.from(document.getElementsByClassName("admin-sidebar-nav-button")).forEach((e) => {
+                e.onclick = () => {
+                    Array.from(document.getElementsByClassName("admin-sidebar-nav-button")).forEach((ee) => {ee.classList.remove("active")})
+                    e.classList.add("active");
+                };
+            });
+        </script>
+    </body>
+    </html>
+{{end}}
