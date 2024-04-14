@@ -31,51 +31,80 @@ func buildFileName() string {
 	return strings.ReplaceAll(id.String(), "-", "_")
 }
 
-func uploadImage(file multipart.File, directory string) (string, error) {
+func isFileImage(file multipart.File) error {
 	fileHeader := make([]byte, 512)
 	_, err := file.Read(fileHeader)
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	_, err = file.Seek(0, 0)
 	if err != nil {
-		return "", err
+		return err
 	}
 
 	mime := http.DetectContentType(fileHeader)
-
-	err = os.MkdirAll(directory, os.ModePerm)
-	if err != nil {
-		return "", err
-	}
-
-	fname := path.Join(directory, buildFileName()) + ".jpg"
 	if !contains([]string{"image/jpeg", "image/png", "image/bmp", "image/gif"}, mime) {
-		return "", errors.New("invalid mime type " + mime)
+		return errors.New("invalid mime type " + mime)
 	}
 
+	return nil
+}
+
+func fileToImage(file multipart.File) (*image.RGBA, error) {
 	imgSrc, _, err := image.Decode(file)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	newImg := image.NewRGBA(imgSrc.Bounds())
 	draw.Draw(newImg, newImg.Bounds(), &image.Uniform{color.White}, image.Point{}, draw.Src)
 	draw.Draw(newImg, newImg.Bounds(), imgSrc, imgSrc.Bounds().Min, draw.Over)
-	f, err := os.OpenFile(fname, os.O_WRONLY|os.O_CREATE, 0666)
+
+	return newImg, nil
+}
+
+func writeImageToFile(filename, directory string, img *image.RGBA) error {
+	err := os.MkdirAll(directory, os.ModePerm)
 	if err != nil {
-		return "", err
+		return err
+	}
+
+	f, err := os.OpenFile(filename, os.O_WRONLY|os.O_CREATE, 0666)
+	if err != nil {
+		return err
 	}
 
 	var opt jpeg.Options
 	opt.Quality = 80
 
-	err = jpeg.Encode(f, newImg, &opt)
+	err = jpeg.Encode(f, img, &opt)
+	if err != nil {
+		return err
+	}
+
+	defer f.Close()
+
+	return nil
+}
+
+func uploadImage(file multipart.File, directory string) (string, error) {
+	err := isFileImage(file)
 	if err != nil {
 		return "", err
 	}
 
-	defer f.Close()
+	fname := path.Join(directory, buildFileName()) + ".jpg"
+
+	img, err := fileToImage(file)
+	if err != nil {
+		return "", err
+	}
+
+	err = writeImageToFile(fname, directory, img)
+	if err != nil {
+		return "", err
+	}
+
 	return "/" + fname, nil
 }

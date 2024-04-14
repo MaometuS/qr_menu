@@ -103,9 +103,4 @@ func TestCategoryRepository_CheckBelongs(t *testing.T) {
 			}
 		}
 	}
-
-	_, err := repo.CheckBelongs(context.Background(), 1, 2)
-	if err.Error() != "db not found in context" {
-		t.Error("did not check for db existence")
-	}
 }

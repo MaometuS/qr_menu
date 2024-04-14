@@ -1,0 +1,87 @@
+package common_repository
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"github.com/pashagolub/pgxmock/v3"
+	"gitlab.com/maometusu/qr_menu/internal/entity"
+	"gitlab.com/maometusu/qr_menu/internal/entity/models"
+	"reflect"
+	"testing"
+)
+
+func TestCommonRepository_GetCurrencies(t *testing.T) {
+	repo := NewCommonRepository()
+
+	type input struct {
+		ctx    context.Context
+		mockDB pgxmock.PgxPoolIface
+	}
+
+	type output struct {
+		currencies []models.Currency
+		err        error
+	}
+
+	type testCase struct {
+		input  input
+		output output
+	}
+
+	mock, err := pgxmock.NewPool(pgxmock.QueryMatcherOption(pgxmock.QueryMatcherEqual))
+	if err != nil {
+		t.Error(err)
+	}
+
+	mock.ExpectQuery("select * from currencies").WillReturnRows(pgxmock.NewRows(
+		[]string{"id", "name", "code"},
+	).AddRow(int64(1), "name", "code"))
+
+	cases := []testCase{
+		{
+			input{
+				context.Background(),
+				nil,
+			},
+			output{
+				nil,
+				errors.New("db not found in context"),
+			},
+		},
+		{
+			input{
+				context.WithValue(context.Background(), "db", entity.PgxIface(mock)),
+				mock,
+			},
+			output{
+				[]models.Currency{
+					{
+						1, "name", "code",
+					},
+				},
+				nil,
+			},
+		},
+	}
+
+	for i, el := range cases {
+		res, err := repo.GetCurrencies(el.input.ctx)
+		if err != nil && el.output.err != nil && err.Error() != el.output.err.Error() {
+			t.Error(fmt.Sprintf("error don't match %d, %v", i, err))
+		} else if err != nil && el.output.err == nil {
+			t.Error("did not expect error: " + err.Error())
+		}
+
+		if !reflect.DeepEqual(res, el.output.currencies) {
+			t.Error("results don't match")
+		}
+
+		if el.input.mockDB != nil {
+			err = el.input.mockDB.ExpectationsWereMet()
+			if err != nil {
+				t.Error(err)
+			}
+		}
+	}
+}
