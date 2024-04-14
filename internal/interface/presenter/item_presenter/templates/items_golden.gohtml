@@ -1,0 +1,662 @@
+
+   <div class="menu-page">
+       <div class="place-nav">
+           <div class="wrapper">
+               <button class="back-button" hx-get="/admin/categories?menu_id=1" hx-target="#main_body">
+                   <img src="/assets/back.svg" alt="">
+               </button>
+           </div>
+       </div>
+       <section class="menu-item-list">
+           <h2 class="menu-item-list-title" style="justify-content:center;">
+               <span>Добавление продуктов</span>
+
+
+
+           </h2>
+
+           
+    <div class="menu-list-item">
+        <button class="icon-button admin-item-add-button" id="open_add_item_dialog_1">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+
+    <div class="base-modal" style="display: none" id="add_item_dialog_1">
+        <form
+                id="add_item_form_1"
+                hx-post="/admin/item/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="order_param" value="1">
+            <input type="hidden" name="category_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Добавить продукт</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Вес</span>
+                                <span class="base-form-input">
+                                <input type="text" name="weight" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Цена</span>
+                                <span class="base-form-input">
+                                <input type="text" name="price" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    
+                    
+                    
+                    
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Доп. информация</span>
+                                <span class="base-form-input">
+                                <textarea class="base-form-input-input" name="additional_info"></textarea>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="image" class="custom-image-picker" accept="image/*" required>
+                            </label>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_visible">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать продукт</span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_available">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Продукт доступен</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_add_item_dialog_1">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_add_item_form_1">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_add_item_dialog_1").addEventListener("click", function () {
+            document.getElementById("add_item_dialog_1").style.display = "flex";
+        });
+
+        document.getElementById("close_add_item_dialog_1").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("add_item_dialog_1").style.display = "none";
+        });
+
+        document.getElementById("add_item_form_1").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("add_item_form_1").reset();
+                    document.getElementById("add_item_dialog_1").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Продукт создан успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+
+           
+               <div class="menu-list-item">
+                   <article class="menu-item">
+                       <div class="menu-item-image">
+                           <img src="image" alt="">
+                       </div>
+                       <div class="menu-item-content">
+                           <div class="menu-item-body">
+                               <div class="menu-item-header">
+                                   <h3 class="menu-item-title">
+                                       name
+                                   </h3>
+                                   <div class="menu-item-weight">
+                                       weight
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="menu-item-footer">
+                           <div class="menu-item-price">
+                            <span class="menu-item-price-content">
+                                <b>10</b>
+                                <span>$</span>
+                            </span>
+                           </div>
+                           <div class="order-action">
+                               <button class="order-action-button remove">-</button>
+                               <div class="order-action-count">0</div>
+                               <button class="order-action-button add">+</button>
+                           </div>
+                       </div>
+                       <div class="menu-item-action">
+                           <div class="menu-item-admin-actions">
+                               <div class="item-admin-actions">
+                                   
+                                   
+                                   <button
+                                           class="icon-button item-admin-actions-item"
+                                           id="open_edit_item_dialog_1"
+                                   >
+                                       <img src="/assets/edit_category_action.svg" alt="">
+                                   </button>
+                                   <button
+                                           class="icon-button item-admin-actions-item"
+                                           hx-delete="/admin/item?id=1&category_id=1"
+                                           hx-target="#main_body"
+                                   >
+                                       <img src="/assets/delete_category_action.svg" alt="">
+                                   </button>
+                               </div>
+                           </div>
+                       </div>
+                   </article>
+               </div>
+
+               
+    <div class="base-modal" style="display: none" id="edit_item_dialog_1">
+        <form
+                id="edit_item_form_1"
+                hx-patch="/admin/item/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="id" value="1">
+            <input type="hidden" name="order_param" value="1">
+            <input type="hidden" name="category_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Редактировать продукт</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" value="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Вес</span>
+                                <span class="base-form-input">
+                                <input type="text" name="weight" value="weight" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Цена</span>
+                                <span class="base-form-input">
+                                <input type="text" name="price" value="10" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    
+                    
+                    
+                    
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Доп. информация</span>
+                                <span class="base-form-input">
+                                <textarea class="base-form-input-input" name="additional_info">additional_info</textarea>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="image" class="custom-image-picker" accept="image/*">
+                            </label>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_visible" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать продукт</span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_available" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Продукт доступен</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_edit_item_dialog_1">Отменить</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_item_form_1">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_edit_item_dialog_1").addEventListener("click", function () {
+            document.getElementById("edit_item_dialog_1").style.display = "flex";
+        });
+
+        document.getElementById("close_edit_item_dialog_1").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("edit_item_dialog_1").style.display = "none";
+        });
+
+        document.getElementById("edit_item_form_1").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    
+                    document.getElementById("edit_item_dialog_1").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Продукт успешно отредактирован',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+               
+    <div class="menu-list-item">
+        <button class="icon-button admin-item-add-button" id="open_add_item_dialog_2">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+
+    <div class="base-modal" style="display: none" id="add_item_dialog_2">
+        <form
+                id="add_item_form_2"
+                hx-post="/admin/item/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="order_param" value="2">
+            <input type="hidden" name="category_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Добавить продукт</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Вес</span>
+                                <span class="base-form-input">
+                                <input type="text" name="weight" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Цена</span>
+                                <span class="base-form-input">
+                                <input type="text" name="price" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    
+                    
+                    
+                    
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Доп. информация</span>
+                                <span class="base-form-input">
+                                <textarea class="base-form-input-input" name="additional_info"></textarea>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="image" class="custom-image-picker" accept="image/*" required>
+                            </label>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_visible">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать продукт</span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="is_available">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Продукт доступен</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_add_item_dialog_2">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_add_item_form_2">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_add_item_dialog_2").addEventListener("click", function () {
+            document.getElementById("add_item_dialog_2").style.display = "flex";
+        });
+
+        document.getElementById("close_add_item_dialog_2").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("add_item_dialog_2").style.display = "none";
+        });
+
+        document.getElementById("add_item_form_2").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("add_item_form_2").reset();
+                    document.getElementById("add_item_dialog_2").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Продукт создан успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+           
+       </section>
+   </div>
