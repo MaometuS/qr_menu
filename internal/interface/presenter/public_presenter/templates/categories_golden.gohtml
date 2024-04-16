@@ -1,0 +1,52 @@
+
+<div class="cafe_list">
+    <div class="cafe_list-body">
+        <div class="search">
+            <div class="search-form">
+                <form hx-get="/search/" hx-target="#main_body" class="search-form-field">
+                    <input type="hidden" name="establishment" value="1">
+                    <input type="hidden" name="menu" value="1">
+                    <div class="search-form-input">
+                        <input type="text" name="search" placeholder="Поиск...">
+                    </div>
+                    <button type="submit" class="search-form-button">
+                        <img src="/assets/search.svg" alt="">
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="category_list">
+            
+                
+                    <div class="category-list-item">
+                        <div class="category-item">
+                            <a
+                                    hx-get="/items?category_id=1"
+                                    hx-target="#main_body"
+                                    class="category-item-link"
+                                    style="background-image: url(background)"
+                            >
+                                <h2>name</h2>
+                            </a>
+                        </div>
+                    </div>
+                
+            
+                
+                    <div class="category-list-item">
+                        <div class="category-item">
+                            <a
+                                    hx-get="/items?category_id=2"
+                                    hx-target="#main_body"
+                                    class="category-item-link"
+                                    style="background-image: url(background2)"
+                            >
+                                <h2>name2</h2>
+                            </a>
+                        </div>
+                    </div>
+                
+            
+        </div>
+    </div>
+</div>

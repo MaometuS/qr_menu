@@ -1,0 +1,543 @@
+
+<div class="cafe_list">
+    <div class="cafe_list-body">
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="category_list">
+            <h2 style="margin-top: 20px;">Добавить категорию</h2>
+
+            
+    <div class="category-list-item">
+        <button class="icon-button admin-item-add-button" id="open_create_category_dialog_1">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+    <div class="base-modal" id="create_category_dialog_1" style="display: none">
+        <form
+                hx-post="/admin/category/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+                id="create_category_form_1"
+        >
+            <input type="hidden" name="order_param" value="1">
+            <input type="hidden" name="menu_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Добавить категорию</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать эту категорию</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="background" class="custom-image-picker" accept="image/*" required>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_create_category_dialog_1">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_category_form_1">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_create_category_dialog_1").addEventListener("click", function () {
+            document.getElementById("create_category_dialog_1").style.display = "flex";
+        });
+
+        document.getElementById("close_create_category_dialog_1").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("create_category_dialog_1").style.display = "none";
+        });
+
+        document.getElementById("create_category_form_1").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("create_category_form_1").reset();
+                    document.getElementById("create_category_dialog_1").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Добавлено успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста ',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+
+            
+                <div class="category-list-item">
+                    <div class="category-item">
+                        <a
+                                hx-get="/admin/items?category_id=1"
+                                hx-target="#main_body"
+                                class="category-item-link"
+                                style="background-image: url(background)"
+                        >
+                            <h2>name</h2>
+                        </a>
+                        <div class="category-item-admin-actions">
+                            
+                            
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/category/move_down?id=1&menu_id=1"
+                                        hx-target="#main_body"
+                                >
+                                    <img src="/assets/down_category_action.svg" alt="">
+                                </button>
+                            
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    id="open_edit_category_dialog_1"
+                            >
+                                <img src="/assets/edit_category_action.svg" alt="">
+                            </button>
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    hx-delete="/admin/category?id=1&menu_id=1"
+                                    hx-target="#main_body"
+                            >
+                                <img src="/assets/delete_category_action.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+    <div class="base-modal" id="edit_category_dialog_1" style="display: none">
+        <form
+                id="edit_category_form_1"
+                hx-patch="/admin/category/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="id" value="1">
+            <input type="hidden" name="order_param" value="1">
+            <input type="hidden" name="menu_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Редактировать категорию</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" value="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать категорию</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="background" class="custom-image-picker" accept="image/*" required>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_edit_category_dialog_1">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_category_form_1">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_edit_category_dialog_1").addEventListener("click", function () {
+            document.getElementById("edit_category_dialog_1").style.display = "flex";
+        });
+
+        document.getElementById("close_edit_category_dialog_1").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("edit_category_dialog_1").style.display = "none";
+        });
+
+        document.getElementById("edit_category_form_1").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    
+                    document.getElementById("edit_category_dialog_1").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Создание успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правилность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+                
+    <div class="category-list-item">
+        <button class="icon-button admin-item-add-button" id="open_create_category_dialog_2">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+    <div class="base-modal" id="create_category_dialog_2" style="display: none">
+        <form
+                hx-post="/admin/category/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+                id="create_category_form_2"
+        >
+            <input type="hidden" name="order_param" value="2">
+            <input type="hidden" name="menu_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Добавить категорию</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать эту категорию</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="background" class="custom-image-picker" accept="image/*" required>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_create_category_dialog_2">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_category_form_2">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_create_category_dialog_2").addEventListener("click", function () {
+            document.getElementById("create_category_dialog_2").style.display = "flex";
+        });
+
+        document.getElementById("close_create_category_dialog_2").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("create_category_dialog_2").style.display = "none";
+        });
+
+        document.getElementById("create_category_form_2").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("create_category_form_2").reset();
+                    document.getElementById("create_category_dialog_2").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Добавлено успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста ',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+            
+                <div class="category-list-item">
+                    <div class="category-item">
+                        <a
+                                hx-get="/admin/items?category_id=2"
+                                hx-target="#main_body"
+                                class="category-item-link"
+                                style="background-image: url(background2)"
+                        >
+                            <h2>name2</h2>
+                        </a>
+                        <div class="category-item-admin-actions">
+                            
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/category/move_up?id=2&menu_id=1"
+                                        hx-target="#main_body"
+                                >
+                                    <img src="/assets/up_category_action.svg" alt="">
+                                </button>
+                            
+                            
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    id="open_edit_category_dialog_2"
+                            >
+                                <img src="/assets/edit_category_action.svg" alt="">
+                            </button>
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    hx-delete="/admin/category?id=2&menu_id=1"
+                                    hx-target="#main_body"
+                            >
+                                <img src="/assets/delete_category_action.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+    <div class="base-modal" id="edit_category_dialog_2" style="display: none">
+        <form
+                id="edit_category_form_2"
+                hx-patch="/admin/category/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="id" value="2">
+            <input type="hidden" name="order_param" value="2">
+            <input type="hidden" name="menu_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Редактировать категорию</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" value="name2" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать категорию</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="background" class="custom-image-picker" accept="image/*" required>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_edit_category_dialog_2">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_category_form_2">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_edit_category_dialog_2").addEventListener("click", function () {
+            document.getElementById("edit_category_dialog_2").style.display = "flex";
+        });
+
+        document.getElementById("close_edit_category_dialog_2").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("edit_category_dialog_2").style.display = "none";
+        });
+
+        document.getElementById("edit_category_form_2").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    
+                    document.getElementById("edit_category_dialog_2").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Создание успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правилность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+                
+    <div class="category-list-item">
+        <button class="icon-button admin-item-add-button" id="open_create_category_dialog_3">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+    <div class="base-modal" id="create_category_dialog_3" style="display: none">
+        <form
+                hx-post="/admin/category/"
+                hx-target="#main_body"
+                enctype="multipart/form-data"
+                id="create_category_form_3"
+        >
+            <input type="hidden" name="order_param" value="3">
+            <input type="hidden" name="menu_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Добавить категорию</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input">
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать эту категорию</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Изображение</span>
+                                <input type="file" name="background" class="custom-image-picker" accept="image/*" required>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_create_category_dialog_3">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_category_form_3">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_create_category_dialog_3").addEventListener("click", function () {
+            document.getElementById("create_category_dialog_3").style.display = "flex";
+        });
+
+        document.getElementById("close_create_category_dialog_3").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("create_category_dialog_3").style.display = "none";
+        });
+
+        document.getElementById("create_category_form_3").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("create_category_form_3").reset();
+                    document.getElementById("create_category_dialog_3").style.display = "none";
+                }, 10);
+                Snackbar.show({
+                    text: 'Добавлено успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста ',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
+            
+
+        </div>
+    </div>
+
+</div>

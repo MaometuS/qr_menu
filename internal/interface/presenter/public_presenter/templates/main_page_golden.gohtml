@@ -1,0 +1,95 @@
+
+    <!doctype html>
+    <html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="/assets/main.css">
+        <link rel="icon" href="logo">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+        <title>name</title>
+    </head>
+
+    <body class="body">
+    <div class="page">
+        <div class="page-head" style="background: url(background)"></div>
+        <div class="page-content">
+            <h1 class="page-title">name</h1>
+            <div class="page-info">
+                <div class="page-info_block_container">
+                    
+                    <div class="page-info_block">
+                        <img src="/assets/location.svg" alt="">
+                        <a href="#">address</a>
+                    </div>
+                    
+                    
+                    <div class="page-info_block">
+                        <img src="/assets/phone.svg" alt="">
+                        <a href="#">123321</a>
+                    </div>
+                    
+                    
+                    <div class="page-info_block">
+                        <img src="/assets/wifi.svg" alt="">
+                        <a href="#">password</a>
+                    </div>
+                    
+                </div>
+                
+                <div class="page-info-description">
+                    <p>text</p>
+                </div>
+                
+            </div>
+            <div class="page-main">
+                <div class="menu">
+                    
+                        
+                            <div class="menu-item _selected" data-id="1">
+                                <div class="menu-item-button" hx-get="/categories?menu_id=1" hx-target="#main_body">
+                                    <span>name</span>
+                                </div>
+                            </div>
+                        
+                    
+                        
+                            <div class="menu-item " data-id="2">
+                                <div class="menu-item-button" hx-get="/categories?menu_id=2" hx-target="#main_body">
+                                    <span>name2</span>
+                                </div>
+                            </div>
+                        
+                    
+                </div>
+                <div id="main_body" hx-get="/categories?menu_id=1" hx-trigger="load"></div>
+                <a
+                        hx-get="/order?menu_id=1"
+                        hx-target="#main_body"
+                        class="place-order"
+                        id="show_order_button"
+                        style="display: flex"
+                >Показать заказ</a>
+            </div>
+            <div class="page_content-footer">
+                <a href="#">qrmenu</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        Array.from(document.getElementsByClassName("menu-item")).forEach((e) => {
+            e.onclick = (evt) => {
+                let id = e.getAttribute("data-id");
+                document.getElementById("show_order_button").setAttribute("hx-get", "/order?id="+id);
+                Array.from(document.getElementsByClassName("menu-item")).forEach((ee) => ee.classList.remove("_selected"));
+                e.classList.add("_selected");
+            };
+        });
+    </script>
+    </body>
+    </html>

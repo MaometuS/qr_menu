@@ -1,0 +1,490 @@
+
+    <div class="menu _admin">
+        <div class="menu-item">
+            
+    <div class="menu-item">
+        <button class="icon-button admin-item-add-button" id="open_create_menu_dialog_1">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+    <div class="base-modal" id="create_menu_dialog_1" style="display: none">
+        <form hx-post="/admin/menu/"
+              hx-target="#menu_list"
+              id="create_menu_dialog_form_1"
+        >
+            <input type="hidden" name="order" value="1">
+            <input type="hidden" name="establishment_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Создание меню</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать меню</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_create_menu_dialog_1">Закрыть</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_menu_dialog_1">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("close_create_menu_dialog_1").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("create_menu_dialog_1").style.display = "none";
+        })
+
+        document.getElementById("open_create_menu_dialog_1").addEventListener("click", function () {
+            document.getElementById("create_menu_dialog_1").style.display = "flex";
+        })
+
+        document.getElementById("create_menu_dialog_form_1").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("create_menu_dialog_form_1").reset();
+                    document.getElementById("create_menu_dialog_1").style.display = "none";
+                }, 10)
+                Snackbar.show({
+                    text: 'Меню создан успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        })
+    </script>
+
+        </div>
+        
+            <div class="menu-item _selected" data-id="1">
+                <div class="menu-item-wrapper">
+                    <div
+                            class="menu-item-button"
+                            data-id="1"
+                            hx-get="/admin/categories?menu_id=1"
+                            hx-trigger="click"
+                            hx-target="#main_body"
+                    >
+                    <span>name</span>
+                    </div>
+                    <div class="menu-admin-actions">
+                        <div class="item-admin-actions">
+                            
+                            
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/menu/move_down?id=1&establishment_id=1"
+                                        hx-target="#menu_list"
+                                >
+                                    <img src="/assets/right_menu_action.svg" alt="">
+                                </button>
+                            
+                            <button class="icon-button item-admin-actions-item" id="open_edit_menu_dialog_1">
+                                <img src="/assets/edit_menu_action.svg" alt="">
+                            </button>
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    hx-delete="/admin/menu?id=1&establishment_id=1"
+                                    hx-target="#menu_list"
+                            >
+                                <img src="/assets/delete_menu_action.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    <div class="menu-item">
+        <button class="icon-button admin-item-add-button" id="open_create_menu_dialog_2">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+    <div class="base-modal" id="create_menu_dialog_2" style="display: none">
+        <form hx-post="/admin/menu/"
+              hx-target="#menu_list"
+              id="create_menu_dialog_form_2"
+        >
+            <input type="hidden" name="order" value="2">
+            <input type="hidden" name="establishment_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Создание меню</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать меню</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_create_menu_dialog_2">Закрыть</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_menu_dialog_2">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("close_create_menu_dialog_2").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("create_menu_dialog_2").style.display = "none";
+        })
+
+        document.getElementById("open_create_menu_dialog_2").addEventListener("click", function () {
+            document.getElementById("create_menu_dialog_2").style.display = "flex";
+        })
+
+        document.getElementById("create_menu_dialog_form_2").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("create_menu_dialog_form_2").reset();
+                    document.getElementById("create_menu_dialog_2").style.display = "none";
+                }, 10)
+                Snackbar.show({
+                    text: 'Меню создан успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        })
+    </script>
+
+            
+    <div class="base-modal" id="edit_menu_dialog_1" style="display: none">
+        <form hx-patch="/admin/menu" hx-target="#menu_list" id="edit_menu_form_1">
+            <input type="hidden" name="id" value="1">
+            <input type="hidden" name="order" value="1">
+            <input type="hidden" name="establishment_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Редактировать меню</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" value="name" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать меню</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_edit_menu_dialog_1">Отменить</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_menu_dialog_1">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_edit_menu_dialog_1").addEventListener("click", function () {
+            document.getElementById("edit_menu_dialog_1").style.display = "flex";
+        })
+
+        document.getElementById("close_edit_menu_dialog_1").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("edit_menu_dialog_1").style.display = "none";
+        })
+
+        document.getElementById("edit_menu_form_1").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                document.getElementById("edit_menu_dialog_1").style.display = "none";
+                Snackbar.show({
+                    text: 'Меню успешно отредактирован',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        })
+    </script>
+
+        
+            <div class="menu-item " data-id="2">
+                <div class="menu-item-wrapper">
+                    <div
+                            class="menu-item-button"
+                            data-id="2"
+                            hx-get="/admin/categories?menu_id=2"
+                            hx-trigger="click"
+                            hx-target="#main_body"
+                    >
+                    <span>name2</span>
+                    </div>
+                    <div class="menu-admin-actions">
+                        <div class="item-admin-actions">
+                            
+                                <button
+                                        class="icon-button item-admin-actions-item"
+                                        hx-patch="/admin/menu/move_up?id=2&establishment_id=1"
+                                        hx-target="#menu_list"
+                                >
+                                    <img src="/assets/left_menu_action.svg" alt="">
+                                </button>
+                            
+                            
+                            <button class="icon-button item-admin-actions-item" id="open_edit_menu_dialog_2">
+                                <img src="/assets/edit_menu_action.svg" alt="">
+                            </button>
+                            <button
+                                    class="icon-button item-admin-actions-item"
+                                    hx-delete="/admin/menu?id=2&establishment_id=1"
+                                    hx-target="#menu_list"
+                            >
+                                <img src="/assets/delete_menu_action.svg" alt="">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+    <div class="menu-item">
+        <button class="icon-button admin-item-add-button" id="open_create_menu_dialog_3">
+            <img src="/assets/plus.svg" alt="">
+        </button>
+    </div>
+    <div class="base-modal" id="create_menu_dialog_3" style="display: none">
+        <form hx-post="/admin/menu/"
+              hx-target="#menu_list"
+              id="create_menu_dialog_form_3"
+        >
+            <input type="hidden" name="order" value="3">
+            <input type="hidden" name="establishment_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Создание меню</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать меню</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_create_menu_dialog_3">Закрыть</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_create_menu_dialog_3">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("close_create_menu_dialog_3").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("create_menu_dialog_3").style.display = "none";
+        })
+
+        document.getElementById("open_create_menu_dialog_3").addEventListener("click", function () {
+            document.getElementById("create_menu_dialog_3").style.display = "flex";
+        })
+
+        document.getElementById("create_menu_dialog_form_3").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                setTimeout(function () {
+                    document.getElementById("create_menu_dialog_form_3").reset();
+                    document.getElementById("create_menu_dialog_3").style.display = "none";
+                }, 10)
+                Snackbar.show({
+                    text: 'Меню создан успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        })
+    </script>
+
+            
+    <div class="base-modal" id="edit_menu_dialog_2" style="display: none">
+        <form hx-patch="/admin/menu" hx-target="#menu_list" id="edit_menu_form_2">
+            <input type="hidden" name="id" value="2">
+            <input type="hidden" name="order" value="2">
+            <input type="hidden" name="establishment_id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Редактировать меню</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" value="name2" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" name="is_visible" class="base-form-checkbox-input" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Показывать меню</span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_edit_menu_dialog_2">Отменить</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_menu_dialog_2">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_edit_menu_dialog_2").addEventListener("click", function () {
+            document.getElementById("edit_menu_dialog_2").style.display = "flex";
+        })
+
+        document.getElementById("close_edit_menu_dialog_2").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("edit_menu_dialog_2").style.display = "none";
+        })
+
+        document.getElementById("edit_menu_form_2").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                document.getElementById("edit_menu_dialog_2").style.display = "none";
+                Snackbar.show({
+                    text: 'Меню успешно отредактирован',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        })
+    </script>
+
+        
+    </div>
+    <script>
+        var selected;
+
+        Array.from(document.getElementsByClassName("menu-item")).forEach((el) => {
+            if (el.classList.contains("_selected")) {
+                selected = parseInt(el.getAttribute("data-id"));
+            }
+        })
+
+        function setSelected(id) {
+            Array.from(document.getElementsByClassName("menu-item")).forEach((el) => {
+                if (parseInt(el.getAttribute("data-id")) === id) {
+                    if (!el.classList.contains("_selected")) {
+                        el.classList.add("_selected");
+                    }
+                } else {
+                    if (el.classList.contains("_selected")) {
+                        el.classList.remove("_selected");
+                    }
+                }
+            })
+        }
+
+        htmx.onLoad(function () {
+            setSelected(selected);
+        })
+
+        Array.from(document.getElementsByClassName("menu-item-button")).forEach((el) => {
+            el.addEventListener("click", (evt) => {
+                selected = parseInt(el.getAttribute("data-id"));
+            })
+        })
+    </script>

@@ -1,0 +1,65 @@
+
+   <div class="menu-page">
+       <div class="search">
+           <div class="search-form">
+               <form hx-get="/search/" hx-target="#main_body" class="search-form-field">
+                   <input type="hidden" name="establishment" value="1">
+                   <input type="hidden" name="menu" value="1">
+                   <div class="search-form-input">
+                       <input type="text" name="search" value="search" placeholder="Поиск...">
+                   </div>
+                   <button type="submit" class="search-form-button">
+                       <img src="/assets/search.svg" alt="">
+                   </button>
+               </form>
+           </div>
+       </div>
+       <section class="menu-item-list">
+           <h2 class="menu-item-list-title">
+               
+           </h2>
+           
+               <div class="menu-list-item" id="item_1">
+                   <article class="menu-item">
+                       <div class="menu-item-image">
+                           <img src="image" alt="">
+                       </div>
+                       <div class="menu-item-content">
+                           <div class="menu-item-body">
+                               <div class="menu-item-header">
+                                   <h3 class="menu-item-title">name</h3>
+                                   <div class="menu-item-weight">weight</div>
+                               </div>
+                               <div class="menu-item-description">
+                                   <p>additional_info</p>
+                               </div>
+                           </div>
+                       </div>
+                       <div class="menu-item-footer">
+                           <div class="menu-item-price">
+                            <span class="menu-item-price-content">
+                                <b>10</b>
+                                <span></span>
+                            </span>
+                           </div>
+                           <div class="order-action-value">
+                               <button
+                                       class="order-action-button remove"
+                                       hx-get="/item/remove?id=1"
+                                       hx-target="#item_1"
+                                       hx-swap="outerHTML"
+                               >-</button>
+                               <div class="order-action-count">1</div>
+                               <button
+                                       class="order-action-button add"
+                                       hx-get="/item/add?id=1"
+                                       hx-target="#item_1"
+                                       hx-swap="outerHTML"
+                               >+</button>
+                           </div>
+                       </div>
+                   </article>
+               </div>
+           
+       </section>
+   </div>

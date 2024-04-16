@@ -1,0 +1,59 @@
+
+    <div class="order">
+        <div class="place-nav">
+            <div class="wrapper">
+                <button class="back-button" hx-get="/categories?menu_id=1" hx-target="#main_body">
+                    <img src="/assets/back.svg" alt="">
+                </button>
+            </div>
+        </div>
+        <h2 class="h2">
+            <span>Мой заказ:</span>
+        </h2>
+        <div class="order-item-list">
+            
+                <div class="order-item" id="order_item_1">
+                    <div class="order-item-header">
+                        <h3 class="order-item-title">name</h3>
+                    </div>
+                    <div class="order-item-footer">
+                        <div class="order-item-price">
+                            <div class="menu-item-price small">
+                                <span class="menu-item-price-content">
+                                    <b>10</b> <span></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="order-item-count">
+                            <div class="order-action-value">
+                                <button
+                                        class="order-action-button remove"
+                                        hx-get="/order/remove?id=1&menu_id=1"
+                                        hx-target="#main_body"
+                                >-</button>
+                                <div class="order-action-count">1</div>
+                                <button
+                                        class="order-action-button add"
+                                        hx-get="/order/add?id=1&menu_id=1"
+                                        hx-target="#main_body"
+                                >+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+        <div class="order-total-price">
+            <span>Итого: </span>
+            <div class="menu-item-price.regular">
+                <span class="menu-item-price-content">
+                    <b id="price_total">10</b><span></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+        document.getElementById("show_order_button").style.display = "flex";
+        
+    </script>

@@ -1,0 +1,213 @@
+
+    <div class="admin-places admin-wrapper" id="establishments_page">
+        <h1 class="admin-places-title">Заведение</h1>
+        <div class="admin-places-main">
+            <div class="admin-places-list">
+                
+                    <div class="place-card">
+                        <h3 class="place-card-name">
+                            name1
+                        </h3>
+                        <div class="place-card-url">
+                            oddmenu.com/p/link1
+                        </div>
+                        <div class="place-card-buttons">
+                            <a href="/admin/e/link1" class="base-button base-button-default">Редактировать</a>
+                            <button
+                                    id="open_delete_establishment_dialog_1"
+                                    class="base-button base-button-secondary"
+                            >Удалить</button>
+                        </div>
+                    </div>
+                    <script>
+                        document.getElementById("open_delete_establishment_dialog_1").addEventListener("click", function () {
+                            document.getElementById("delete_establishment_dialog_1").style.display = "flex";
+                        });
+                    </script>
+                    
+    <div class="base-modal" id="delete_establishment_dialog_1" style="display: none">
+        <div class="base-modal-overlay"></div>
+        <div class="base-modal-main">
+            <div class="base-modal-header">
+                <h2>Удалить?</h2>
+            </div>
+            <div class="base-modal-footer">
+                <div class="crud-modal-footer">
+                    <button class="base-button base-button-secondary" id="close_delete_establishment_dialog_1">Отмена</button>
+                    <button
+                            hx-delete="/admin/establishment?id=1"
+                            hx-trigger="click"
+                            hx-target="#establishments_page"
+                            hx-swap="outerHTML"
+                            class="base-button base-button-default"
+                    >Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("close_delete_establishment_dialog_1").addEventListener("click", function () {
+            document.getElementById("delete_establishment_dialog_1").style.display = "none";
+        })
+    </script>
+
+                
+                    <div class="place-card">
+                        <h3 class="place-card-name">
+                            name2
+                        </h3>
+                        <div class="place-card-url">
+                            oddmenu.com/p/link2
+                        </div>
+                        <div class="place-card-buttons">
+                            <a href="/admin/e/link2" class="base-button base-button-default">Редактировать</a>
+                            <button
+                                    id="open_delete_establishment_dialog_2"
+                                    class="base-button base-button-secondary"
+                            >Удалить</button>
+                        </div>
+                    </div>
+                    <script>
+                        document.getElementById("open_delete_establishment_dialog_2").addEventListener("click", function () {
+                            document.getElementById("delete_establishment_dialog_2").style.display = "flex";
+                        });
+                    </script>
+                    
+    <div class="base-modal" id="delete_establishment_dialog_2" style="display: none">
+        <div class="base-modal-overlay"></div>
+        <div class="base-modal-main">
+            <div class="base-modal-header">
+                <h2>Удалить?</h2>
+            </div>
+            <div class="base-modal-footer">
+                <div class="crud-modal-footer">
+                    <button class="base-button base-button-secondary" id="close_delete_establishment_dialog_2">Отмена</button>
+                    <button
+                            hx-delete="/admin/establishment?id=2"
+                            hx-trigger="click"
+                            hx-target="#establishments_page"
+                            hx-swap="outerHTML"
+                            class="base-button base-button-default"
+                    >Удалить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("close_delete_establishment_dialog_2").addEventListener("click", function () {
+            document.getElementById("delete_establishment_dialog_2").style.display = "none";
+        })
+    </script>
+
+                
+                <button class="add-place-button" onclick="openCreateForm()">
+                    <span class="add-place-button-icon">
+                        <img src="/assets/add_button.svg" alt="">
+                    </span>
+                    <span class="add-place-button-title">Добавить заведение</span>
+                </button>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    
+    <div class="base-modal" id="create_form" style="display: none">
+        <form
+                hx-post="/admin/establishment/"
+                hx-target="#establishments_page"
+                hx-swap="outerHTML"
+                id="create_establishment_form"
+        >
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Добавить заведение</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Ссылка</span>
+                                <span class="base-form-input">
+                                <input
+                                        type="text"
+                                        onkeyup="document.getElementById('slug').innerText ='qrmenu.uz/e/' + this.value; this.setCustomValidity('')"
+                                        name="link"
+                                        class="base-form-input-input"
+                                        id="establishment_link"
+                                        hx-get="/admin/establishment/does_link_exist"
+                                        hx-trigger="keyup changed delay:500ms"
+                                        hx-swap="none"
+                                        hx-on:htmx:after-request="checkLink(event)"
+                                        required
+                                >
+                            </span>
+                                <span id="slug" class="base-form-slug">qrmenu.uz/e/</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label required">
+                                <span class="base-form-label-name">Валюта</span>
+                                <select class="base-form-select" name="currency">
+                                    
+                                        <option value="1">Sum</option>
+                                    
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_form_button">Отменить</button>
+                        <button type="submit" class="base-button base-button-default" id="create_establishment_button">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("close_form_button").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("create_form").style.display = "none";
+        })
+
+        document.getElementById("create_establishment_form").addEventListener('submit', function () {
+            setTimeout(function () {
+                document.getElementById("create_establishment_form").reset();
+                document.getElementById("create_form").style.display = "none";
+            }, 10)
+        })
+
+        async function checkLink(event) {
+            if (event.detail.xhr.responseText === "true") {
+                document.getElementById("establishment_link").setCustomValidity('Ссылка уже существует');
+            } else {
+                document.getElementById("establishment_link").setCustomValidity('');
+            }
+        }
+    </script>
+
+    <script>
+        function openCreateForm() {
+            document.getElementById("create_form").style.display = "flex";
+        }
+    </script>

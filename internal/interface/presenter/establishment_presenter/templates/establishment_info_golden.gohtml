@@ -1,0 +1,216 @@
+
+    <h1 class="page-title">
+        <span>name</span>
+        <button class="icon-button" id="open_edit_establishment_dialog">
+            <img src="/assets/pen.svg" alt="">
+        </button>
+        <a href="/admin/establishment/qrcode?id=1" download class="icon-button">
+            <img src="/assets/qr-code.png" alt="" style="height: 22px; width: 22px;">
+        </a>
+    </h1>
+    <div class="page-info">
+        <div class="page-info_block_container">
+            
+                <div class="page-info_block">
+                    <img src="/assets/location.svg" alt="">
+                    <a href="#">address</a>
+                </div>
+            
+            
+                <div class="page-info_block">
+                    <img src="/assets/phone.svg" alt="">
+                    <a href="#">123321</a>
+                </div>
+            
+            
+                <div class="page-info_block">
+                    <img src="/assets/wifi.svg" alt="">
+                    <a href="#">password</a>
+                </div>
+            
+        </div>
+        
+            <div class="page-info-description">
+                <p>text</p>
+            </div>
+        
+    </div>
+    <script>
+        document.getElementById("title").innerText = "name";
+        
+        document.getElementById("favicon").href = "logo";
+        
+        
+        document.getElementById("page_head").style.background = "url(background)";
+        
+    </script>
+    
+    <div class="base-modal" id="edit_establishment_dialog" style="display: none">
+        <form
+                hx-patch="/admin/establishment/"
+                hx-target="#establishment_info"
+                id="edit_establishment_form"
+                enctype="multipart/form-data"
+        >
+            <input type="hidden" name="id" value="1">
+            <div class="base-modal-overlay"></div>
+            <div class="base-modal-main">
+                <div class="base-modal-header">
+                    <h2>Редактировать заведение</h2>
+                </div>
+                <div class="base-modal-body">
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label required">
+                                <span class="base-form-label-name">Название</span>
+                                <span class="base-form-input">
+                                <input type="text" name="name" value="name" class="base-form-input-input" required>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label required">
+                                <span class="base-form-label-name">Валюта</span>
+                                <select class="base-form-select" name="currency" required>
+                                    
+                                        <option selected value="1">Sum</option>
+                                    
+                                </select>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Номер телефона</span>
+                                <span class="base-form-input">
+                                    <input type="text" name="phone" value="123321" class="base-form-input-input">
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Логотип</span>
+                                <input type="file" name="logo" accept="image/*" class="custom-image-picker">
+                            </label>
+
+
+
+
+
+
+
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Фоновое изображение</span>
+                                <input type="file" name="logo" accept="image/*" class="custom-image-picker">
+                            </label>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Данные WiFi</span>
+                                <span class="base-form-input">
+                                <input type="text" name="wifi_password" value="password" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label for="" class="base-form-checkbox">
+                                <input type="checkbox" class="base-form-checkbox-input" name="can_make_orders" checked>
+                                <i class="base-form-checkbox-button"></i>
+                                <span class="base-form-checkbox-text">Разрешить делать заказы</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Страна</span>
+                                <span class="base-form-input">
+                                <input type="text" name="country" value="country" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Город</span>
+                                <span class="base-form-input">
+                                <input type="text" name="city" value="city" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label class="base-form-label">
+                                <span class="base-form-label-name">Адрес</span>
+                                <span class="base-form-input">
+                                <input type="text" name="address" value="address" class="base-form-input-input">
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="base-form-row-wr">
+                        <div class="base-form-row">
+                            <label for="" class="base-form-label">
+                                <span class="base-form-label-name">Дополнительная информация</span>
+                                <span class="base-form-input">
+                                <textarea class="base-form-input-input" name="additional_info">text</textarea>
+                            </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="base-modal-footer">
+                    <div class="crud-modal-footer">
+                        <button class="base-button base-button-secondary" id="close_edit_establishment_dialog">Отмена</button>
+                        <button type="submit" class="base-button base-button-default" id="save_edit_establishment_dialog">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("open_edit_establishment_dialog").addEventListener("click", function () {
+            document.getElementById("edit_establishment_dialog").style.display = "flex";
+        });
+
+        document.getElementById("close_edit_establishment_dialog").addEventListener("click", function (evt) {
+            evt.preventDefault();
+            document.getElementById("edit_establishment_dialog").style.display = "none";
+        });
+
+        document.getElementById("edit_establishment_form").addEventListener("htmx:afterRequest", function (evt) {
+            if (evt.detail.successful === true) {
+                document.getElementById("edit_establishment_dialog").style.display = "none";
+                Snackbar.show({
+                    text: 'Редактирование успешно',
+                    actionText: 'Закрыть',
+                });
+            } else {
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность введенных данных',
+                    actionText: 'Закрыть',
+                });
+            }
+        });
+    </script>
+
