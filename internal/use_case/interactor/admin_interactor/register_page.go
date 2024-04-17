@@ -6,5 +6,5 @@ import (
 )
 
 func (a *adminInteractor) RegisterPage(context context.Context, w io.Writer) error {
-	return a.presenter.RegisterPage(w)
+	return a.presenter.RegisterPage(w, false, false, false)
 }

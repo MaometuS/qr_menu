@@ -40,7 +40,7 @@ type Controller struct {
 	public_controller.PublicController
 }
 
-func NewController(db entity.PgxIface) *Controller {
+func NewController(config *entity.Config, db entity.PgxIface) *Controller {
 	return &Controller{
 		AdminController: admin_controller.NewAdminController(
 			admin_interactor.NewAdminInteractor(admin_presenter.NewAdminPresenter(), profile_repository.NewProfileRepository()),
@@ -50,7 +50,7 @@ func NewController(db entity.PgxIface) *Controller {
 			establishment_presenter.NewEstablishmentPresenter(),
 			establishment_repository.NewEstablishmentRepository(),
 			menu_repository.NewMenuRepository(),
-			file_repository.NewFileRepository(),
+			file_repository.NewFileRepository(config),
 			common_repository.NewCommonRepository(),
 		), db),
 		CommonController: common_controller.NewCommonController(db),
@@ -67,7 +67,7 @@ func NewController(db entity.PgxIface) *Controller {
 				category_presenter.NewCategoryPresenter(),
 				category_repository.NewCategoryRepository(),
 				menu_repository.NewMenuRepository(),
-				file_repository.NewFileRepository(),
+				file_repository.NewFileRepository(config),
 			),
 			db,
 		),
@@ -75,7 +75,7 @@ func NewController(db entity.PgxIface) *Controller {
 			item_interactor.NewItemInteractor(
 				item_presenter.NewItemPresenter(),
 				item_repository.NewItemRepository(),
-				file_repository.NewFileRepository(),
+				file_repository.NewFileRepository(config),
 				category_repository.NewCategoryRepository(),
 			),
 			db,

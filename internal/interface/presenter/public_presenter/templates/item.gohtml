@@ -2,7 +2,7 @@
     <div class="menu-list-item" id="item_{{.I.ID}}">
         <article class="menu-item">
             <div class="menu-item-image">
-                <img src="{{.I.Image}}" alt="">
+                <img src="/uploaded/{{.I.Image}}" alt="">
             </div>
             <div class="menu-item-content">
                 <div class="menu-item-body">
@@ -19,7 +19,7 @@
                 <div class="menu-item-price">
                                     <span class="menu-item-price-content">
                                         <b>{{.I.Price}}</b>
-                                        <span>$</span>
+{{/*                                        <span>$</span>*/}}
                                     </span>
                 </div>
                 {{if .I.IsAvailable}}

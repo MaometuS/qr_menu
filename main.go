@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -19,14 +20,35 @@ func main() {
 		log.Fatal(err)
 	}
 
-	app := router.NewRouter(controller.NewController(newDB()))
+	config, err := getConfig()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	app := router.NewRouter(controller.NewController(config, newDB(config.DbUrl)))
 
 	fmt.Println("Serving on 4000")
 	http.ListenAndServe(":4000", app)
 }
 
-func newDB() entity.PgxIface {
-	db, err := pgxpool.New(context.Background(), os.Getenv("db_url"))
+func getConfig() (*entity.Config, error) {
+	mailPort, err := strconv.ParseInt(os.Getenv("mail_port"), 10, 64)
+	if err != nil {
+		return nil, err
+	}
+
+	return &entity.Config{
+		DbUrl:        os.Getenv("db_url"),
+		UploadFolder: os.Getenv("upload_folder"),
+		MailFrom:     os.Getenv("mail_from"),
+		MailPassword: os.Getenv("mail_password"),
+		MailAddress:  os.Getenv("mail_address"),
+		MailPort:     mailPort,
+	}, nil
+}
+
+func newDB(url string) entity.PgxIface {
+	db, err := pgxpool.New(context.Background(), url)
 	if err != nil {
 		log.Fatal(err)
 	}

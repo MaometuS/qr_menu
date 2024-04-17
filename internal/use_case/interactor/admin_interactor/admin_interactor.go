@@ -12,9 +12,9 @@ type AdminInteractor interface {
 	AdminPage(context context.Context, w io.Writer, id int64) error
 	ProfilePage(context context.Context, w io.Writer, id int64) error
 	LoginPage(context context.Context, w io.Writer) error
-	HandleLogin(context context.Context, email, password string) (string, error)
+	HandleLogin(context context.Context, w io.Writer, email, password string) (string, error)
 	RegisterPage(context context.Context, w io.Writer) error
-	HandleRegister(context context.Context, name, email, password string) error
+	HandleRegister(context context.Context, w io.Writer, name, email, password, passRepeat string) error
 	VerifyEmailPage(context context.Context, w io.Writer, id int64) error
 	HandleVerifyEmail(context context.Context, id int64, verificationCode string) (string, error)
 	ChangePassword(ctx context.Context, password, passRepeat string, id int64) error
@@ -25,12 +25,18 @@ type AdminInteractor interface {
 
 type adminInteractor struct {
 	presenter         presenter.AdminPresenter
+	emailRepository   repository.EmailRepository
 	profileRepository repository.ProfileRepository
 }
 
-func NewAdminInteractor(presenter presenter.AdminPresenter, repository repository.ProfileRepository) AdminInteractor {
+func NewAdminInteractor(
+	presenter presenter.AdminPresenter,
+	emailRepository repository.EmailRepository,
+	repository repository.ProfileRepository,
+) AdminInteractor {
 	return &adminInteractor{
 		presenter:         presenter,
+		emailRepository:   emailRepository,
 		profileRepository: repository,
 	}
 }

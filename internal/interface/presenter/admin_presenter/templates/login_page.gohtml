@@ -16,7 +16,7 @@
                                 <label class="base-form-label required">
                                     <span class="base-form-label-name">E-mail</span>
                                     <span class="base-form-input">
-                                            <input type="email" name="email" class="base-form-input-input">
+                                            <input type="email" name="email" class="base-form-input-input" required>
                                         </span>
                                 </label>
                             </div>
@@ -27,7 +27,7 @@
                                 <label class="base-form-label required">
                                     <span class="base-form-label-name">Пароль</span>
                                     <span class="base-form-input">
-                                            <input type="password" name="password" class="base-form-input-input">
+                                            <input type="password" name="password" class="base-form-input-input" required>
                                         </span>
                                 </label>
                             </div>
@@ -43,6 +43,23 @@
                 </div>
             </div>
         </form>
+        <script>
+            {{if .NoMatch}}
+                Snackbar.show({
+                    text: 'Логин или пароль не совпадают',
+                    duration: 10000,
+                    actionText: 'Закрыть',
+                });
+            {{end}}
+
+            {{if .Unexpected}}
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста попробуйте позже',
+                    duration: 10000,
+                    actionText: 'Закрыть',
+                });
+            {{end}}
+        </script>
     </body>
     </html>
 {{end}}

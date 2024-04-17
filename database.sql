@@ -5,7 +5,7 @@
 -- Dumped from database version 13.6
 -- Dumped by pg_dump version 13.6
 
--- Started on 2024-04-16 22:30:18
+-- Started on 2024-04-17 19:03:13
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -389,10 +389,6 @@ ALTER TABLE ONLY public.profiles ALTER COLUMN id SET DEFAULT nextval('public.pro
 --
 
 COPY public.categories (id, name, background, menu_id, is_visible, order_param) FROM stdin;
-9	asdfads12312	/uploaded/eea68f51_5874_426c_8c18_e23e65c0e894.jpg	12	t	1
-12	asdfasd	/uploaded/9efa8027_7d32_4c20_86d9_53dff08cae06.jpg	15	t	1
-11	vbvbnvb	/uploaded/11d9cc35_25e0_4e8d_b8bb_45d806333301.jpg	12	t	2
-10	ghjghj	/uploaded/bcec8745_7cbc_44a4_ac0f_12628d545cca.jpg	12	t	3
 \.
 
 
@@ -418,7 +414,6 @@ COPY public.currencies (id, name, code) FROM stdin;
 --
 
 COPY public.establishments (id, name, phone, logo, background, wifi_password, can_make_orders, country, city, address, text, profile_id, currency_id, link) FROM stdin;
-5	name111	08097778784	/uploaded/67df8422_156d_42a3_9708_84eb93e2b465.jpg	/uploaded/351ed804_a330_4f2d_a303_7f226babffeb.jpg	234432	t	Япония	Sendai	sdfgsdfgdfg	sdfgsdfg	18	1	name
 \.
 
 
@@ -429,9 +424,6 @@ COPY public.establishments (id, name, phone, logo, background, wifi_password, ca
 --
 
 COPY public.items (id, name, weight, additional_info, is_visible, is_available, image, category_id, order_param, price) FROM stdin;
-3	hjlhklhk	123	dfasdfasdfasdfasdf	t	t	/uploaded/ed7c04a1_f64d_42e6_8451_eddfa4717710.jpg	9	2	432
-4	asdf123	456	sdfasdfasdf	t	t	/uploaded/d9178a67_1c57_4538_8d44_fadb7e8f4505.jpg	9	3	77
-2	asdfasd45	1000	asdfasdfasdf	t	t	/uploaded/ff64fbe7_c489_46ad_8979_a05be01f678a.jpg	9	1	34
 \.
 
 
@@ -442,9 +434,6 @@ COPY public.items (id, name, weight, additional_info, is_visible, is_available, 
 --
 
 COPY public.menus (id, name, is_visible, establishment_id, order_param) FROM stdin;
-12	Old Menu	t	5	1
-15	New Menu	t	5	2
-13	Future Menu	t	5	3
 \.
 
 
@@ -455,7 +444,6 @@ COPY public.menus (id, name, is_visible, establishment_id, order_param) FROM std
 --
 
 COPY public.profiles (id, name, email, password, verified, verification_code) FROM stdin;
-18	Maometus	test@test.test	$2a$06$5tG9IOSfCpMNK7xaXEY4LuuGosFZT7nhg/DWpz8KApRo380YymnoG	t	710817
 \.
 
 
@@ -649,7 +637,7 @@ ALTER TABLE ONLY public.variants
     ADD CONSTRAINT variants_fk FOREIGN KEY (item_id) REFERENCES public.items(id) ON DELETE CASCADE;
 
 
--- Completed on 2024-04-16 22:30:18
+-- Completed on 2024-04-17 19:03:14
 
 --
 -- PostgreSQL database dump complete

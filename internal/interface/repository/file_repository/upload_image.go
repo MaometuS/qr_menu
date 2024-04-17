@@ -94,7 +94,9 @@ func uploadImage(file multipart.File, directory string) (string, error) {
 		return "", err
 	}
 
-	fname := path.Join(directory, buildFileName()) + ".jpg"
+	name := buildFileName() + ".jpg"
+
+	fname := path.Join(directory, name)
 
 	img, err := fileToImage(file)
 	if err != nil {
@@ -106,5 +108,5 @@ func uploadImage(file multipart.File, directory string) (string, error) {
 		return "", err
 	}
 
-	return "/" + fname, nil
+	return name, nil
 }

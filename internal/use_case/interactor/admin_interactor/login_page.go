@@ -6,5 +6,5 @@ import (
 )
 
 func (a *adminInteractor) LoginPage(context context.Context, w io.Writer) error {
-	return a.presenter.LoginPage(w)
+	return a.presenter.LoginPage(w, false, false)
 }

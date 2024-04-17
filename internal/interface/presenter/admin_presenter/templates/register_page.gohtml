@@ -16,7 +16,7 @@
                                 <label class="base-form-label required">
                                     <span class="base-form-label-name">Имя</span>
                                     <span class="base-form-input">
-                                        <input type="text" name="name" class="base-form-input-input">
+                                        <input type="text" name="name" class="base-form-input-input" required>
                                     </span>
                                 </label>
                             </div>
@@ -27,7 +27,7 @@
                                 <label class="base-form-label required">
                                     <span class="base-form-label-name">E-mail</span>
                                     <span class="base-form-input">
-                                        <input type="email" name="email" class="base-form-input-input">
+                                        <input type="email" name="email" class="base-form-input-input" required>
                                     </span>
                                 </label>
                             </div>
@@ -38,7 +38,7 @@
                                 <label class="base-form-label required">
                                     <span class="base-form-label-name">Пароль</span>
                                     <span class="base-form-input">
-                                        <input type="password" name="password" class="base-form-input-input">
+                                        <input type="password" name="password" class="base-form-input-input" required>
                                     </span>
                                 </label>
                             </div>
@@ -49,7 +49,7 @@
                                 <label class="base-form-label required">
                                     <span class="base-form-label-name">Повторите пароль</span>
                                     <span class="base-form-input">
-                                        <input type="password" name="password_repeat" class="base-form-input-input">
+                                        <input type="password" name="pass_repeat" class="base-form-input-input" required>
                                     </span>
                                 </label>
                             </div>
@@ -64,6 +64,31 @@
                 </div>
             </div>
         </form>
+        <script>
+            {{if .EmailExists}}
+                Snackbar.show({
+                    text: 'Email уже зарегистрирован',
+                    duration: 10000,
+                    actionText: 'Закрыть',
+                });
+            {{end}}
+
+            {{if .PasswordsNotMatch}}
+                Snackbar.show({
+                    text: 'Пароли не совпадают',
+                    duration: 10000,
+                    actionText: 'Закрыть',
+                });
+            {{end}}
+
+            {{if .Unexpected}}
+                Snackbar.show({
+                    text: 'Произошла ошибка, пожалуйста проверьте правильность данных',
+                    duration: 10000,
+                    actionText: 'Закрыть',
+                });
+            {{end}}
+        </script>
     </body>
     </html>
 {{end}}

@@ -38,10 +38,10 @@
     <script>
         document.getElementById("title").innerText = "{{.E.Name}}";
         {{if ne .E.Logo ""}}
-        document.getElementById("favicon").href = "{{.E.Logo}}";
+        document.getElementById("favicon").href = "/uploaded/{{.E.Logo}}";
         {{end}}
         {{if ne .E.Background ""}}
-        document.getElementById("page_head").style.background = "url({{.E.Background}})";
+        document.getElementById("page_head").style.background = "url(/uploaded/{{.E.Background}})";
         {{end}}
     </script>
     {{template "edit_establishment_dialog" .}}

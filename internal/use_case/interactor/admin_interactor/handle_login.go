@@ -4,16 +4,19 @@ import (
 	"context"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
+	"io"
 )
 
-func (a *adminInteractor) HandleLogin(context context.Context, email, password string) (string, error) {
+func (a *adminInteractor) HandleLogin(context context.Context, w io.Writer, email, password string) (string, error) {
 	profile, err := a.profileRepository.GetOneByEmail(context, email)
 	if err != nil {
+		a.presenter.LoginPage(w, true, false)
 		return "", err
 	}
 
 	err = bcrypt.CompareHashAndPassword([]byte(profile.Password), []byte(password))
 	if err != nil {
+		a.presenter.LoginPage(w, true, false)
 		return "", err
 	}
 
@@ -24,6 +27,7 @@ func (a *adminInteractor) HandleLogin(context context.Context, email, password s
 
 	tokenString, err := token.SignedString([]byte("asldfjof3982vu42oj3kj"))
 	if err != nil {
+		a.presenter.LoginPage(w, false, true)
 		return "", err
 	}
 
