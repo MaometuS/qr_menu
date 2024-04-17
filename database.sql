@@ -24,7 +24,7 @@ DROP DATABASE qrmenu;
 -- Name: qrmenu; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE qrmenu WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Russian_Russia.1251';
+CREATE DATABASE qrmenu WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE='ru_RU.UTF-8' LC_CTYPE='ru_RU.UTF-8';
 
 
 ALTER DATABASE qrmenu OWNER TO postgres;
