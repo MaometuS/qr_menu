@@ -67,7 +67,7 @@ func fileToImage(file multipart.File) (image.Image, error) {
 }
 
 func writeImageToFile(filename, directory string, img image.Image) error {
-	err := os.MkdirAll(directory, 0700)
+	err := os.MkdirAll(directory, os.ModePerm)
 	if err != nil {
 		return err
 	}
