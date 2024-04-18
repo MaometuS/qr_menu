@@ -1,3 +1,4 @@
 git pull
-go build -o build/piarmenu
-sudo systemctl restart piarmenu.service
+sudo systemctl stop piarmenu.service
+go build -o piarmenu
+sudo systemctl start piarmenu.service
