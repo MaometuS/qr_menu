@@ -13,7 +13,7 @@ func (c *controller) HandleRegister(w http.ResponseWriter, r *http.Request) {
 
 	err := c.interactor.HandleRegister(context.WithValue(r.Context(), "db", c.db), w, name, email, password, passRepeat)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		//http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }

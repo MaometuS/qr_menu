@@ -3,6 +3,7 @@ package file_repository
 import (
 	"errors"
 	"github.com/gofrs/uuid"
+	"github.com/nfnt/resize"
 	"image"
 	"image/color"
 	"image/draw"
@@ -51,7 +52,7 @@ func isFileImage(file multipart.File) error {
 	return nil
 }
 
-func fileToImage(file multipart.File) (*image.RGBA, error) {
+func fileToImage(file multipart.File) (image.Image, error) {
 	imgSrc, _, err := image.Decode(file)
 	if err != nil {
 		return nil, err
@@ -60,11 +61,12 @@ func fileToImage(file multipart.File) (*image.RGBA, error) {
 	newImg := image.NewRGBA(imgSrc.Bounds())
 	draw.Draw(newImg, newImg.Bounds(), &image.Uniform{color.White}, image.Point{}, draw.Src)
 	draw.Draw(newImg, newImg.Bounds(), imgSrc, imgSrc.Bounds().Min, draw.Over)
+	resImg := resize.Thumbnail(1920, 1080, newImg, resize.Lanczos3)
 
-	return newImg, nil
+	return resImg, nil
 }
 
-func writeImageToFile(filename, directory string, img *image.RGBA) error {
+func writeImageToFile(filename, directory string, img image.Image) error {
 	err := os.MkdirAll(directory, os.ModePerm)
 	if err != nil {
 		return err
