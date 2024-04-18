@@ -25,7 +25,7 @@ func (a *adminInteractor) HandleLogin(context context.Context, w io.Writer, emai
 		"sub": profile.ID,
 	})
 
-	tokenString, err := token.SignedString([]byte("asldfjof3982vu42oj3kj"))
+	tokenString, err := token.SignedString([]byte(a.config.JWTSignString))
 	if err != nil {
 		a.presenter.LoginPage(w, false, true)
 		return "", err

@@ -26,5 +26,5 @@ func (c *controller) HandleLogin(w http.ResponseWriter, r *http.Request) {
 		SameSite: http.SameSiteStrictMode,
 	}
 	http.SetCookie(w, cookie)
-	http.Redirect(w, r, "/admin/", http.StatusPermanentRedirect)
+	http.Redirect(w, r, "/admin/", http.StatusSeeOther)
 }

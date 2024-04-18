@@ -38,12 +38,13 @@ func getConfig() (*entity.Config, error) {
 	}
 
 	return &entity.Config{
-		DbUrl:        os.Getenv("db_url"),
-		UploadFolder: os.Getenv("upload_folder"),
-		MailFrom:     os.Getenv("mail_from"),
-		MailPassword: os.Getenv("mail_password"),
-		MailAddress:  os.Getenv("mail_address"),
-		MailPort:     mailPort,
+		DbUrl:         os.Getenv("db_url"),
+		UploadFolder:  os.Getenv("upload_folder"),
+		JWTSignString: os.Getenv("jwt_sign_string"),
+		MailFrom:      os.Getenv("mail_from"),
+		MailPassword:  os.Getenv("mail_password"),
+		MailAddress:   os.Getenv("mail_address"),
+		MailPort:      mailPort,
 	}, nil
 }
 

@@ -26,7 +26,7 @@ func (a *adminInteractor) HandleVerifyEmail(context context.Context, id int64, v
 		"sub": id,
 	})
 
-	tokenString, err := token.SignedString([]byte("asldfjof3982vu42oj3kj"))
+	tokenString, err := token.SignedString([]byte(a.config.JWTSignString))
 	if err != nil {
 		return "", err
 	}

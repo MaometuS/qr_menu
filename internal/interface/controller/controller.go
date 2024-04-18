@@ -17,6 +17,7 @@ import (
 	"gitlab.com/maometusu/qr_menu/internal/interface/presenter/public_presenter"
 	"gitlab.com/maometusu/qr_menu/internal/interface/repository/category_repository"
 	"gitlab.com/maometusu/qr_menu/internal/interface/repository/common_repository"
+	"gitlab.com/maometusu/qr_menu/internal/interface/repository/email_repository"
 	"gitlab.com/maometusu/qr_menu/internal/interface/repository/establishment_repository"
 	"gitlab.com/maometusu/qr_menu/internal/interface/repository/file_repository"
 	"gitlab.com/maometusu/qr_menu/internal/interface/repository/item_repository"
@@ -43,16 +44,24 @@ type Controller struct {
 func NewController(config *entity.Config, db entity.PgxIface) *Controller {
 	return &Controller{
 		AdminController: admin_controller.NewAdminController(
-			admin_interactor.NewAdminInteractor(admin_presenter.NewAdminPresenter(), profile_repository.NewProfileRepository()),
+			admin_interactor.NewAdminInteractor(
+				admin_presenter.NewAdminPresenter(),
+				email_repository.NewEmailRepository(config),
+				profile_repository.NewProfileRepository(),
+				config,
+			),
 			db,
 		),
-		EstablishmentController: establishment_controller.NewEstablishmentController(establishment_interactor.NewEstablishmentInteractor(
-			establishment_presenter.NewEstablishmentPresenter(),
-			establishment_repository.NewEstablishmentRepository(),
-			menu_repository.NewMenuRepository(),
-			file_repository.NewFileRepository(config),
-			common_repository.NewCommonRepository(),
-		), db),
+		EstablishmentController: establishment_controller.NewEstablishmentController(
+			establishment_interactor.NewEstablishmentInteractor(
+				establishment_presenter.NewEstablishmentPresenter(),
+				establishment_repository.NewEstablishmentRepository(),
+				menu_repository.NewMenuRepository(),
+				file_repository.NewFileRepository(config),
+				common_repository.NewCommonRepository(),
+			),
+			db,
+		),
 		CommonController: common_controller.NewCommonController(db),
 		MenuController: menu_controller.NewMenuController(
 			menu_interactor.NewMenuInteractor(

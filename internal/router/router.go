@@ -9,8 +9,10 @@ func NewRouter(controller *controller.Controller) http.Handler {
 
 	mux := http.NewServeMux()
 
+	mux.Handle("GET /", http.RedirectHandler("/admin/", http.StatusPermanentRedirect))
+
 	fs := http.FileServer(http.Dir("./uploaded"))
-	mux.Handle("/uploaded/", http.StripPrefix("/uploaded/", fs))
+	mux.Handle("GET /uploaded/", http.StripPrefix("/uploaded/", fs))
 	mux.HandleFunc("GET /assets/", controller.CommonController.ServeAssets)
 
 	mux.HandleFunc("GET /register/", controller.AdminController.RegisterPage)

@@ -8,38 +8,38 @@ import (
 	"io"
 )
 
-func (a *adminInteractor) HandleRegister(context context.Context, w io.Writer, name, email, password, passRepeat string) error {
+func (a *adminInteractor) HandleRegister(context context.Context, w io.Writer, name, email, password, passRepeat string) (int64, error) {
 	exists, err := a.profileRepository.CheckExistence(context, email)
 	if err != nil {
 		a.presenter.RegisterPage(w, false, false, true)
-		return err
+		return 0, err
 	}
 
 	if exists {
 		a.presenter.RegisterPage(w, true, false, false)
-		return errors.New("email already exists")
+		return 0, errors.New("email already exists")
 	}
 
 	if password != passRepeat {
 		a.presenter.RegisterPage(w, false, true, false)
-		return errors.New("passwords don't match")
+		return 0, errors.New("passwords don't match")
 	}
 
 	passHash, err := bcrypt.GenerateFromPassword([]byte(password), 6)
 	if err != nil {
 		a.presenter.RegisterPage(w, false, false, true)
-		return err
+		return 0, err
 	}
 
-	_, err = a.profileRepository.Create(context, &models.Profile{
+	id, err := a.profileRepository.Create(context, &models.Profile{
 		Name:     name,
 		Email:    email,
 		Password: string(passHash),
 	})
 	if err != nil {
 		a.presenter.RegisterPage(w, false, false, true)
-		return err
+		return 0, err
 	}
 
-	return nil
+	return id, nil
 }
