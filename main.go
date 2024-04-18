@@ -15,7 +15,7 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
+	err := godotenv.Load(".env_piarmenu")
 	if err != nil {
 		log.Fatal(err)
 	}
