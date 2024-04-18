@@ -25,7 +25,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	app := router.NewRouter(controller.NewController(config, newDB(config.DbUrl)))
+	app := router.NewRouter(controller.NewController(config, newDB(config.DbUrl)), config)
 
 	fmt.Println("Serving on 4000")
 	http.ListenAndServe(":4000", app)

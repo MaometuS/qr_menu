@@ -1,17 +1,18 @@
 package router
 
 import (
+	"gitlab.com/maometusu/qr_menu/internal/entity"
 	"gitlab.com/maometusu/qr_menu/internal/interface/controller"
 	"net/http"
 )
 
-func NewRouter(controller *controller.Controller) http.Handler {
+func NewRouter(controller *controller.Controller, config *entity.Config) http.Handler {
 
 	mux := http.NewServeMux()
 
 	mux.Handle("GET /", http.RedirectHandler("/admin/", http.StatusPermanentRedirect))
 
-	fs := http.FileServer(http.Dir("./uploaded"))
+	fs := http.FileServer(http.Dir(config.UploadFolder))
 	mux.Handle("GET /uploaded/", http.StripPrefix("/uploaded/", fs))
 	mux.HandleFunc("GET /assets/", controller.CommonController.ServeAssets)
 
