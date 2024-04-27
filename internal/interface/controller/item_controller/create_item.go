@@ -9,7 +9,11 @@ import (
 )
 
 func (i *itemController) CreateItem(w http.ResponseWriter, r *http.Request) {
-	id := r.Context().Value("id").(int64)
+	id, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "id not found in context", http.StatusInternalServerError)
+		return
+	}
 
 	err := r.ParseMultipartForm(0)
 	if err != nil {

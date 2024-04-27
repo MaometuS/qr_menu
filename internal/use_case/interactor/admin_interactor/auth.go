@@ -12,7 +12,7 @@ func (a *adminInteractor) Auth(context context.Context, tokenString string) (int
 			return nil, errors.New("unexpected signing method")
 		}
 
-		return []byte("asldfjof3982vu42oj3kj"), nil
+		return []byte(a.config.JWTSignString), nil
 	})
 	if err != nil {
 		return 0, err

@@ -6,17 +6,12 @@ import (
 )
 
 func (i *interactor) MoveDown(ctx context.Context, profileID, menuID int64) error {
-	menu, err := i.repository.GetOne(ctx, menuID)
+	belongs, err := i.repository.CheckBelongs(ctx, menuID, profileID)
 	if err != nil {
 		return err
 	}
 
-	establishment, err := i.establishmentRepository.GetOne(ctx, menu.EstablishmentID)
-	if err != nil {
-		return err
-	}
-
-	if establishment.ProfileID != profileID {
+	if !belongs {
 		return errors.New("not allowed")
 	}
 

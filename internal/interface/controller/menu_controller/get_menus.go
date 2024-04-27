@@ -7,7 +7,11 @@ import (
 )
 
 func (m *menuController) GetMenus(w http.ResponseWriter, r *http.Request) {
-	id := r.Context().Value("id").(int64)
+	id, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "id not present in context", http.StatusInternalServerError)
+		return
+	}
 
 	establishmentID, err := strconv.ParseInt(r.URL.Query().Get("establishment_id"), 10, 64)
 	if err != nil {

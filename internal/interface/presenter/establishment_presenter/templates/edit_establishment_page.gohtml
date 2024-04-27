@@ -13,7 +13,7 @@
             ></div>
             <div class="page-main">
                 <div id="menu_list" hx-get="/admin/menus?establishment_id={{.Establishment.ID}}" hx-trigger="load"></div>
-                <div id="main_body" hx-get="/admin/categories?menu_id={{.TopMenuID}}" hx-trigger="load"></div>
+                <div id="main_body" {{if ne .TopMenuID 0}}hx-get="/admin/categories?menu_id={{.TopMenuID}}" hx-trigger="load"{{end}}></div>
 
 {{/*                <div class="cafe_list">*/}}
 {{/*                    <div class="cafe_list-body">*/}}

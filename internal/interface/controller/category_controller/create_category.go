@@ -9,7 +9,11 @@ import (
 )
 
 func (c *categoryController) CreateCategory(w http.ResponseWriter, r *http.Request) {
-	id := r.Context().Value("id").(int64)
+	id, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "no profile id in context", http.StatusInternalServerError)
+		return
+	}
 
 	err := r.ParseMultipartForm(0)
 	if err != nil {

@@ -17,7 +17,7 @@ type AdminInteractor interface {
 	RegisterPage(context context.Context, w io.Writer) error
 	HandleRegister(context context.Context, w io.Writer, name, email, password, passRepeat string) (int64, error)
 	VerifyEmailPage(context context.Context, w io.Writer, id int64) error
-	HandleVerifyEmail(context context.Context, id int64, verificationCode string) (string, error)
+	HandleVerifyEmail(context context.Context, w io.Writer, id int64, verificationCode string) (string, error)
 	ChangePassword(ctx context.Context, password, passRepeat string, id int64) error
 	EditName(ctx context.Context, email, name string, id int64) (bool, error)
 	VerifyEmailEditPage(ctx context.Context, w io.Writer, id int64, email string) error

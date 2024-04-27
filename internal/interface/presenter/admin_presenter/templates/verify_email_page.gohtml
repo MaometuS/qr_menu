@@ -4,7 +4,7 @@
     {{template "head" "Верификация e-mail"}}
     <body>
         <form action="/verify_email/" method="post">
-            <input type="hidden" name="id" value="{{.}}">
+            <input type="hidden" name="id" value="{{.ID}}">
             <div class="base-modal">
                 <div class="base-modal-overlay"></div>
                 <div class="base-modal-main">
@@ -25,13 +25,30 @@
                     </div>
                     <div class="base-modal-footer">
                         <div class="crud-modal-footer">
-                            <a href="/verify_email?id={{.}}" class="base-button base-button-secondary">Отправить код заново</a>
+                            <a href="/verify_email?id={{.ID}}" class="base-button base-button-secondary">Отправить код заново</a>
                             <button type="submit" class="base-button base-button-default">Сохранить</button>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
+        <script>
+            {{if .Mismatch}}
+            Snackbar.show({
+                text: 'Код не совпадает',
+                duration: 10000,
+                actionText: 'Закрыть',
+            });
+            {{end}}
+
+            {{if .Error}}
+            Snackbar.show({
+                text: 'Произошла ошибка, пожалуйста попробуйте позже',
+                duration: 10000,
+                actionText: 'Закрыть',
+            });
+            {{end}}
+        </script>
     </body>
     </html>
 {{end}}

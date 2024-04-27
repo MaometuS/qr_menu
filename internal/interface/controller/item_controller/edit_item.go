@@ -9,7 +9,11 @@ import (
 )
 
 func (i *itemController) EditItem(w http.ResponseWriter, r *http.Request) {
-	profileID := r.Context().Value("id").(int64)
+	profileID, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "id not found in context", http.StatusInternalServerError)
+		return
+	}
 
 	err := r.ParseMultipartForm(0)
 	if err != nil {

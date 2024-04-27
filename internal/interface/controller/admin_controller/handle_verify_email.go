@@ -16,9 +16,8 @@ func (c *controller) HandleVerifyEmail(w http.ResponseWriter, r *http.Request) {
 
 	code := r.PostFormValue("code")
 
-	tokenString, err := c.interactor.HandleVerifyEmail(context.WithValue(r.Context(), "db", c.db), id, code)
+	tokenString, err := c.interactor.HandleVerifyEmail(context.WithValue(r.Context(), "db", c.db), w, id, code)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 

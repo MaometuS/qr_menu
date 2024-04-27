@@ -12,13 +12,13 @@ func (e *establishmentInteractor) EstablishmentInfo(context context.Context, w i
 		return err
 	}
 
+	if establishment.ProfileID != profileID {
+		return errors.New("not allowed for current profile")
+	}
+
 	currencies, err := e.commonRepository.GetCurrencies(context)
 	if err != nil {
 		return err
-	}
-
-	if establishment.ProfileID != profileID {
-		return errors.New("not allowed for current profile")
 	}
 
 	return e.presenter.PresentEstablishmentInfo(w, establishment, currencies)

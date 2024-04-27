@@ -7,7 +7,12 @@ import (
 )
 
 func (c *controller) EstablishmentInfo(w http.ResponseWriter, r *http.Request) {
-	profileID := r.Context().Value("id").(int64)
+	profileID, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "id is not in context", http.StatusInternalServerError)
+		return
+	}
+
 	establishmentID, err := strconv.ParseInt(r.URL.Query().Get("id"), 10, 64)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusExpectationFailed)

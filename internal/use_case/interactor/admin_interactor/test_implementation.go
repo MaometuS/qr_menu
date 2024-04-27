@@ -31,8 +31,8 @@ func (t *TestImplementation) LoginPage(context context.Context, w io.Writer) err
 	return args.Error(0)
 }
 
-func (t *TestImplementation) HandleLogin(context context.Context, email, password string) (string, error) {
-	args := t.Called(context, email, password)
+func (t *TestImplementation) HandleLogin(context context.Context, w io.Writer, email, password string) (string, error) {
+	args := t.Called(context, w, email, password)
 	return args.String(0), args.Error(1)
 }
 
@@ -41,9 +41,9 @@ func (t *TestImplementation) RegisterPage(context context.Context, w io.Writer) 
 	return args.Error(0)
 }
 
-func (t *TestImplementation) HandleRegister(context context.Context, name, email, password string) error {
-	args := t.Called(context, name, email, password)
-	return args.Error(0)
+func (t *TestImplementation) HandleRegister(context context.Context, w io.Writer, name, email, password, passRepeat string) (int64, error) {
+	args := t.Called(context, w, name, email, password, passRepeat)
+	return int64(args.Int(0)), args.Error(1)
 }
 
 func (t *TestImplementation) VerifyEmailPage(context context.Context, w io.Writer, id int64) error {
@@ -51,8 +51,8 @@ func (t *TestImplementation) VerifyEmailPage(context context.Context, w io.Write
 	return args.Error(0)
 }
 
-func (t *TestImplementation) HandleVerifyEmail(context context.Context, id int64, verificationCode string) (string, error) {
-	args := t.Called(context, id, verificationCode)
+func (t *TestImplementation) HandleVerifyEmail(context context.Context, w io.Writer, id int64, verificationCode string) (string, error) {
+	args := t.Called(context, w, id, verificationCode)
 	return args.String(0), args.Error(1)
 }
 

@@ -9,7 +9,11 @@ import (
 )
 
 func (m *menuController) CreateMenu(w http.ResponseWriter, r *http.Request) {
-	id := r.Context().Value("id").(int64)
+	id, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "id not present in context", http.StatusInternalServerError)
+		return
+	}
 
 	name := r.PostFormValue("name")
 	isVisible := r.PostFormValue("is_visible") == "on"

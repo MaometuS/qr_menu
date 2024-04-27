@@ -8,21 +8,27 @@ import (
 )
 
 func (i *itemController) DeleteItem(w http.ResponseWriter, r *http.Request) {
-	profileID := r.Context().Value("id").(int64)
+	profileID, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "id not found in context", http.StatusInternalServerError)
+		return
+	}
 
 	id, err := strconv.ParseInt(r.URL.Query().Get("id"), 10, 64)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusExpectationFailed)
+		return
 	}
 
 	categoryID, err := strconv.ParseInt(r.URL.Query().Get("category_id"), 10, 64)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusExpectationFailed)
+		return
 	}
 
 	err = i.interactor.DeleteItem(context.WithValue(r.Context(), "db", i.db), profileID, id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusExpectationFailed)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 

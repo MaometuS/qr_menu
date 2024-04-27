@@ -7,7 +7,11 @@ import (
 )
 
 func (i *itemController) GetItems(w http.ResponseWriter, r *http.Request) {
-	profileID := r.Context().Value("id").(int64)
+	profileID, ok := r.Context().Value("id").(int64)
+	if !ok {
+		http.Error(w, "id is not present in request", http.StatusInternalServerError)
+		return
+	}
 
 	categoryID, err := strconv.ParseInt(r.URL.Query().Get("category_id"), 10, 64)
 	if err != nil {
