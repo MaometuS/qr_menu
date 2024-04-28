@@ -1,6 +1,8 @@
 package public_interactor
 
-import "context"
+import (
+	"context"
+)
 
 func (p *publicInteractor) AddItem(ctx context.Context, itemID int64, selectedItems map[int64][]int64) (map[int64][]int64, error) {
 	establishmentID, err := p.itemsRepository.GetEstablishment(ctx, itemID)

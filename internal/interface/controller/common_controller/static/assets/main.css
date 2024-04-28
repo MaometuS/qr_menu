@@ -1384,6 +1384,14 @@ textarea.base-form-input-input {
     border-color: #f2f2f2;
 }
 
+.htmx-request.button-text {
+    display: none;
+}
+
+.htmx-request .button-text {
+    display: none;
+}
+
 .base-form-row.row-6 {
     flex: .6 1 0;
 }
@@ -1554,4 +1562,44 @@ textarea.base-form-input-input {
     font-weight: 500;
     color: white;
     background: #ff5722;
+}
+
+.spinner {
+    display: block;
+    animation: loading-bar-spinner 400ms linear infinite;
+}
+
+.spinner .spinner-icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    border:  solid 4px transparent;
+    border-top-color:  white !important;
+    border-left-color: white !important;
+    border-radius: 50%;
+}
+
+@keyframes loading-bar-spinner {
+    0%   { transform: rotate(0deg);   transform: rotate(0deg); }
+    100% { transform: rotate(360deg); transform: rotate(360deg); }
+}
+
+.htmx-indicator{
+    display:none;
+}
+.htmx-request .htmx-indicator{
+    display:block;
+}
+.htmx-request.htmx-indicator{
+    display:block;
+}
+
+.htmx-hide-on-request{
+    display:block;
+}
+.htmx-request .htmx-hide-on-request{
+    display:none;
+}
+.htmx-request.htmx-hide-on-request{
+    display:none;
 }

@@ -49,7 +49,14 @@
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
                         <button class="base-button base-button-secondary" id="close_edit_category_dialog_{{.OrderParam}}">Отмена</button>
-                        <button type="submit" class="base-button base-button-default" id="reset_edit_category_form_{{.OrderParam}}">Сохранить</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_category_form_{{.OrderParam}}">
+                            <span class="button-text">
+                                Сохранить
+                            </span>
+                            <div class="htmx-indicator spinner">
+                                <div class="spinner-icon"></div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>

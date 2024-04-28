@@ -35,7 +35,14 @@
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
                         <button class="base-button base-button-secondary" id="close_edit_menu_dialog_{{.ID}}">Отменить</button>
-                        <button type="submit" class="base-button base-button-default" id="reset_edit_menu_dialog_{{.ID}}">Сохранить</button>
+                        <button type="submit" class="base-button base-button-default" id="reset_edit_menu_dialog_{{.ID}}">
+                            <span class="button-text">
+                                Сохранить
+                            </span>
+                            <div class="htmx-indicator spinner">
+                                <div class="spinner-icon"></div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-.env
+.env_piarmenu
 /.air.toml
 /tmp/build-errors.log
 /tmp/main.exe
