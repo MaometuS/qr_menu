@@ -24,7 +24,7 @@ func (a *adminInteractor) Auth(context context.Context, tokenString string) (int
 			return 0, errors.New("cannot find id")
 		}
 
-		prof, err := a.profileRepository.GetOne(context, int64(1))
+		prof, err := a.profileRepository.GetOne(context, int64(id))
 		if err != nil {
 			return 0, err
 		}
