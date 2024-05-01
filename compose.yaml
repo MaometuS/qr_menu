@@ -1,0 +1,18 @@
+services:
+  piarmenu:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - /home/qoobcreation/piarmenu_uploaded:/piarmenu_uploaded
+
+  postges:
+    image: "postgres:16-alpine"
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - piarmenu_db:/var/lib/postgresql/data
+
+volumes:
+  piarmenu_db:
+    external: true

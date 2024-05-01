@@ -13,7 +13,7 @@ func (p *profileRepository) Update(context context.Context, profile *models.Prof
 		return errors.New("connection is missing from context")
 	}
 
-	_, err := db.Exec(context, "update profiles set name = $1, email = $2, password = $3", profile.Name, profile.Email, profile.Password)
+	_, err := db.Exec(context, "update profiles set name = $1, email = $2, password = $3 where id = $4", profile.Name, profile.Email, profile.Password, profile.ID)
 	if err != nil {
 		return err
 	}
