@@ -5,6 +5,7 @@ import (
 	"errors"
 	"gitlab.com/maometusu/qr_menu/internal/entity/models"
 	"mime/multipart"
+	"strings"
 )
 
 func (e *establishmentInteractor) EditEstablishment(ctx context.Context, logo, background multipart.File, establishment *models.Establishment) error {
@@ -30,6 +31,8 @@ func (e *establishmentInteractor) EditEstablishment(ctx context.Context, logo, b
 			return err
 		}
 	}
+
+	establishment.Logo = strings.ToLower(establishment.Link)
 
 	err = e.repository.UpdateEstablishment(ctx, establishment)
 	if err != nil {
