@@ -24,6 +24,15 @@ func (a *adminInteractor) Auth(context context.Context, tokenString string) (int
 			return 0, errors.New("cannot find id")
 		}
 
+		prof, err := a.profileRepository.GetOne(context, int64(1))
+		if err != nil {
+			return 0, err
+		}
+
+		if !prof.Verified {
+			return 0, errors.New("user unverified")
+		}
+
 		return int64(id), nil
 	} else {
 		return 0, errors.New("jwt claims are not valid")
