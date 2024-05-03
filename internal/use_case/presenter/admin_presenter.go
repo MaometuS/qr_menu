@@ -13,10 +13,22 @@ type AdminPresenter interface {
 	RegisterPage(w io.Writer, emailExists, passwordsNotMatch, unexpected bool) error
 	VerifyPage(w io.Writer, id int64, mismatch, hasError bool) error
 	VerifyEmailEditPage(w io.Writer, email string) error
+	RestorePasswordPage(w io.Writer, noUser, passwordMismatch, unexpected bool) error
+	VerifyRestorePasswordPage(w io.Writer, id int64, mismatch, hasError bool) error
 }
 
 type AdminPresenterMock struct {
 	mock.Mock
+}
+
+func (t *AdminPresenterMock) RestorePasswordPage(w io.Writer, noUser, passwordMismatch, unexpected bool) error {
+	args := t.Called(w, noUser, passwordMismatch, unexpected)
+	return args.Error(0)
+}
+
+func (t *AdminPresenterMock) VerifyRestorePasswordPage(w io.Writer, id int64, mismatch, hasError bool) error {
+	args := t.Called(w, id, mismatch, hasError)
+	return args.Error(0)
 }
 
 func (t *AdminPresenterMock) LoginPage(w io.Writer, noMatch, unexpected bool) error {

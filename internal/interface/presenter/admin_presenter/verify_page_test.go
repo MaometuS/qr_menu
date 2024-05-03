@@ -38,7 +38,7 @@ func generateGoldenVerifyPage() {
 		panic(err)
 	}
 
-	f, err := os.OpenFile("templates/verify_page_golden.gohtml", os.O_WRONLY|os.O_CREATE, 0666)
+	f, err := os.OpenFile("templates/verify_email_golden.gohtml", os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}

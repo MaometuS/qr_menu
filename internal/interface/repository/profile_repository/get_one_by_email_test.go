@@ -39,8 +39,8 @@ func TestProfileRepository_GetOneByEmail(t *testing.T) {
 		"select * from profiles where email = $1 and verified = true",
 	).WithArgs("email").WillReturnRows(
 		pgxmock.NewRows(
-			[]string{"id", "name", "email", "password", "verified", "verification_code"},
-		).AddRow(int64(1), "name", "email", "password", true, "code"),
+			[]string{"id", "name", "email", "password", "new_password", "verified", "verification_code"},
+		).AddRow(int64(1), "name", "email", "password", "new_password", true, "code"),
 	)
 
 	cases := []testCase{
@@ -67,6 +67,7 @@ func TestProfileRepository_GetOneByEmail(t *testing.T) {
 					Name:             "name",
 					Email:            "email",
 					Password:         "password",
+					NewPassword:      "new_password",
 					Verified:         true,
 					VerificationCode: "code",
 				},

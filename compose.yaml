@@ -5,7 +5,7 @@ services:
     volumes:
       - /home/qoobcreation/piarmenu_uploaded:/piarmenu_uploaded
 
-  postges:
+  postgres:
     image: "postgres:16-alpine"
     restart: unless-stopped
     environment:

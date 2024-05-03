@@ -21,6 +21,10 @@ type AdminController interface {
 	VerifyEmailEditPage(w http.ResponseWriter, r *http.Request)
 	EditEmail(w http.ResponseWriter, r *http.Request)
 	EditName(w http.ResponseWriter, r *http.Request)
+	RestorePasswordPage(w http.ResponseWriter, r *http.Request)
+	RestorePassword(w http.ResponseWriter, r *http.Request)
+	VerifyRestorePasswordPage(w http.ResponseWriter, r *http.Request)
+	VerifyRestorePassword(w http.ResponseWriter, r *http.Request)
 }
 
 type controller struct {

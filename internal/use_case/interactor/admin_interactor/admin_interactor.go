@@ -22,6 +22,10 @@ type AdminInteractor interface {
 	EditName(ctx context.Context, email, name string, id int64) (bool, error)
 	VerifyEmailEditPage(ctx context.Context, w io.Writer, id int64, email string) error
 	EditEmail(ctx context.Context, email, verificationCode string, id int64) error
+	RestorePasswordPage(ctx context.Context, w io.Writer) error
+	RestorePassword(ctx context.Context, w io.Writer, email, pass, passRepeat string) (int64, error)
+	VerifyRestorePasswordPage(ctx context.Context, w io.Writer, id int64) error
+	VerifyRestorePassword(ctx context.Context, w io.Writer, id int64, verificationCode string) error
 }
 
 type adminInteractor struct {

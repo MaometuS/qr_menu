@@ -5,6 +5,7 @@ type Profile struct {
 	Name             string
 	Email            string
 	Password         string
+	NewPassword      string
 	Verified         bool
 	VerificationCode string
 }

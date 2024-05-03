@@ -34,8 +34,8 @@ func TestProfileRepository_Update(t *testing.T) {
 	}
 
 	mock.ExpectExec(
-		"update profiles set name = $1, email = $2, password = $3",
-	).WithArgs("name", "email", "password").WillReturnResult(pgxmock.NewResult("UPDATE", 1))
+		"update profiles set name = $1, email = $2, password = $3, new_password=$4 where id = $5",
+	).WithArgs("name", "email", "password", "new_password", int64(1)).WillReturnResult(pgxmock.NewResult("UPDATE", 1))
 
 	cases := []testCase{
 		{
@@ -53,9 +53,11 @@ func TestProfileRepository_Update(t *testing.T) {
 				context.WithValue(context.Background(), "db", entity.PgxIface(mock)),
 				mock,
 				&models.Profile{
-					Name:     "name",
-					Email:    "email",
-					Password: "password",
+					ID:          1,
+					Name:        "name",
+					Email:       "email",
+					Password:    "password",
+					NewPassword: "new_password",
 				},
 			},
 			output{
