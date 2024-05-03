@@ -1,6 +1,7 @@
 package admin_controller
 
 import (
+	"context"
 	"net/http"
 	"strconv"
 )
@@ -12,7 +13,12 @@ func (c *controller) VerifyRestorePassword(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	err = c.interactor.VerifyRestorePassword(r.Context(), w, id, r.PostFormValue("verification_code"))
+	err = c.interactor.VerifyRestorePassword(
+		context.WithValue(r.Context(), "db", c.db),
+		w,
+		id,
+		r.PostFormValue("verification_code"),
+	)
 	if err != nil {
 		return
 	}

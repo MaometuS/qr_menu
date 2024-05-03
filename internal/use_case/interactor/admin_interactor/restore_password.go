@@ -8,7 +8,7 @@ import (
 )
 
 func (a *adminInteractor) RestorePassword(ctx context.Context, w io.Writer, email, pass, passRepeat string) (int64, error) {
-	prof, err := a.profileRepository.GetOneByEmail(context.Background(), email)
+	prof, err := a.profileRepository.GetOneByEmail(ctx, email)
 	if err != nil {
 		a.presenter.RestorePasswordPage(w, true, false, false)
 		return 0, err
@@ -26,7 +26,7 @@ func (a *adminInteractor) RestorePassword(ctx context.Context, w io.Writer, emai
 	}
 
 	prof.NewPassword = string(passHash)
-	err = a.profileRepository.Update(context.Background(), prof)
+	err = a.profileRepository.Update(ctx, prof)
 	if err != nil {
 		a.presenter.RestorePasswordPage(w, false, false, true)
 		return 0, err

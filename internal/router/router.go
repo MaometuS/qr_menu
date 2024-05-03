@@ -25,6 +25,12 @@ func NewRouter(controller *controller.Controller, config *entity.Config) http.Ha
 	mux.HandleFunc("GET /login/", controller.AdminController.LoginPage)
 	mux.HandleFunc("POST /login/", controller.AdminController.HandleLogin)
 
+	mux.HandleFunc("GET /restore_password/", controller.AdminController.RestorePasswordPage)
+	mux.HandleFunc("POST /restore_password/", controller.AdminController.RestorePassword)
+
+	mux.HandleFunc("GET /verify_restore_password/", controller.AdminController.VerifyRestorePasswordPage)
+	mux.HandleFunc("POST /verify_restore_password/", controller.AdminController.VerifyRestorePassword)
+
 	mux.HandleFunc("GET /e/{link}/", controller.PublicController.GetMainPage)
 	mux.HandleFunc("GET /categories/", controller.PublicController.GetCategories)
 	mux.HandleFunc("GET /items/", controller.PublicController.GetItems)

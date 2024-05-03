@@ -7,7 +7,7 @@ import (
 )
 
 func (a *adminInteractor) VerifyRestorePassword(ctx context.Context, w io.Writer, id int64, verificationCode string) error {
-	prof, err := a.profileRepository.GetOne(context.Background(), id)
+	prof, err := a.profileRepository.GetOne(ctx, id)
 	if err != nil {
 		a.presenter.VerifyRestorePasswordPage(w, id, false, true)
 		return err
@@ -19,7 +19,7 @@ func (a *adminInteractor) VerifyRestorePassword(ctx context.Context, w io.Writer
 	}
 
 	prof.Password = prof.NewPassword
-	err = a.profileRepository.Update(context.Background(), prof)
+	err = a.profileRepository.Update(ctx, prof)
 	if err != nil {
 		a.presenter.VerifyRestorePasswordPage(w, id, false, true)
 		return err

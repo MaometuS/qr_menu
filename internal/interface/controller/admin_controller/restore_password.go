@@ -1,13 +1,14 @@
 package admin_controller
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 )
 
 func (c *controller) RestorePassword(w http.ResponseWriter, r *http.Request) {
 	id, err := c.interactor.RestorePassword(
-		r.Context(),
+		context.WithValue(r.Context(), "db", c.db),
 		w,
 		r.PostFormValue("email"),
 		r.PostFormValue("password"),
