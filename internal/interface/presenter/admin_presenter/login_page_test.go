@@ -22,7 +22,10 @@ func TestAdminPresenter_LoginPage(t *testing.T) {
 		t.Error(err)
 	}
 
-	err = tmpl.ExecuteTemplate(ex, "login_page", nil)
+	err = tmpl.ExecuteTemplate(ex, "login_page", map[string]any{
+		"NoMatch":    true,
+		"Unexpected": true,
+	})
 	if err != nil {
 		t.Error(err)
 	}
@@ -43,7 +46,10 @@ func generateGoldenLoginPage() {
 		panic(err)
 	}
 
-	err = tmpl.ExecuteTemplate(f, "login_page", nil)
+	err = tmpl.ExecuteTemplate(f, "login_page", map[string]any{
+		"NoMatch":    true,
+		"Unexpected": true,
+	})
 	if err != nil {
 		panic(err)
 	}

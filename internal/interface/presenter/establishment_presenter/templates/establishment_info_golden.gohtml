@@ -108,7 +108,7 @@
                         <div class="base-form-row">
                             <label for="" class="base-form-label">
                                 <span class="base-form-label-name">Фоновое изображение</span>
-                                <input type="file" name="logo" accept="image/*" class="custom-image-picker">
+                                <input type="file" name="background" accept="image/*" class="custom-image-picker">
                             </label>
 
 
@@ -182,7 +182,14 @@
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
                         <button class="base-button base-button-secondary" id="close_edit_establishment_dialog">Отмена</button>
-                        <button type="submit" class="base-button base-button-default" id="save_edit_establishment_dialog">Сохранить</button>
+                        <button type="submit" class="base-button base-button-default" id="save_edit_establishment_dialog">
+                            <span class="button-text">
+                                Сохранить
+                            </span>
+                            <div class="htmx-indicator spinner">
+                                <div class="spinner-icon"></div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>

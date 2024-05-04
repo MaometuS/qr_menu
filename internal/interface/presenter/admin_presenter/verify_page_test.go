@@ -10,7 +10,7 @@ import (
 )
 
 func TestAdminPresenter_VerifyPage(t *testing.T) {
-	golden, err := os.ReadFile("templates/verify_page_golden.gohtml")
+	golden, err := os.ReadFile("templates/verify_email_page_golden.gohtml")
 	if err != nil {
 		t.Error(err)
 	}
@@ -22,7 +22,11 @@ func TestAdminPresenter_VerifyPage(t *testing.T) {
 		t.Error(err)
 	}
 
-	err = tmpl.ExecuteTemplate(ex, "verify_email", 1)
+	err = tmpl.ExecuteTemplate(ex, "verify_email", map[string]any{
+		"ID":       1,
+		"Mismatch": true,
+		"Error":    true,
+	})
 	if err != nil {
 		t.Error(err)
 	}
@@ -38,14 +42,18 @@ func generateGoldenVerifyPage() {
 		panic(err)
 	}
 
-	f, err := os.OpenFile("templates/verify_email_golden.gohtml", os.O_WRONLY|os.O_CREATE, 0666)
+	f, err := os.OpenFile("templates/verify_email_page_golden.gohtml", os.O_WRONLY|os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}
 
 	defer f.Close()
 
-	err = tmpl.ExecuteTemplate(f, "verify_email", 1)
+	err = tmpl.ExecuteTemplate(f, "verify_email", map[string]any{
+		"ID":       1,
+		"Mismatch": true,
+		"Error":    true,
+	})
 	if err != nil {
 		panic(err)
 	}

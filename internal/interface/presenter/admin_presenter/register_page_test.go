@@ -22,7 +22,11 @@ func TestAdminPresenter_RegisterPage(t *testing.T) {
 		t.Error(err)
 	}
 
-	err = tmpl.ExecuteTemplate(ex, "register_page", nil)
+	err = tmpl.ExecuteTemplate(ex, "register_page", map[string]any{
+		"EmailExists":       true,
+		"PasswordsNotMatch": true,
+		"Unexpected":        true,
+	})
 	if err != nil {
 		t.Error(err)
 	}
@@ -45,7 +49,11 @@ func generateGoldenRegisterPage() {
 
 	defer f.Close()
 
-	err = tmpl.ExecuteTemplate(f, "register_page", nil)
+	err = tmpl.ExecuteTemplate(f, "register_page", map[string]any{
+		"EmailExists":       true,
+		"PasswordsNotMatch": true,
+		"Unexpected":        true,
+	})
 	if err != nil {
 		panic(err)
 	}

@@ -30,13 +30,27 @@
                                         class="order-action-button remove"
                                         hx-get="/order/remove?id=1&menu_id=1"
                                         hx-target="#main_body"
-                                >-</button>
+                                >
+                                    <span class="htmx-hide-on-request">-</span>
+                                    <div class="htmx-indicator" style="padding-top: 8px">
+                                        <div class="spinner">
+                                            <div class="spinner-icon"></div>
+                                        </div>
+                                    </div>
+                                </button>
                                 <div class="order-action-count">1</div>
                                 <button
                                         class="order-action-button add"
                                         hx-get="/order/add?id=1&menu_id=1"
                                         hx-target="#main_body"
-                                >+</button>
+                                >
+                                    <span class="htmx-hide-on-request">+</span>
+                                    <div class="htmx-indicator" style="padding-top: 8px">
+                                        <div class="spinner">
+                                            <div class="spinner-icon"></div>
+                                        </div>
+                                    </div>
+                                </button>
                             </div>
                         </div>
                     </div>

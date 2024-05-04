@@ -48,7 +48,7 @@ func TestItemPresenter_PresentItems(t *testing.T) {
 	}
 }
 
-func generateFile() {
+func generateGolden() {
 	tmpl, err := template.New("").Funcs(sprig.FuncMap()).ParseFS(templates, "templates/*.gohtml")
 	if err != nil {
 		panic(err)

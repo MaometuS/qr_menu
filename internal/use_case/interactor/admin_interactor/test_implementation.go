@@ -11,6 +11,26 @@ type TestImplementation struct {
 	mock.Mock
 }
 
+func (t *TestImplementation) RestorePasswordPage(ctx context.Context, w io.Writer) error {
+	args := t.Called(ctx, w)
+	return args.Error(0)
+}
+
+func (t *TestImplementation) RestorePassword(ctx context.Context, w io.Writer, email, pass, passRepeat string) (int64, error) {
+	args := t.Called(ctx, w, email, pass, passRepeat)
+	return int64(args.Int(0)), args.Error(1)
+}
+
+func (t *TestImplementation) VerifyRestorePasswordPage(ctx context.Context, w io.Writer, id int64) error {
+	args := t.Called(ctx, w, id)
+	return args.Error(0)
+}
+
+func (t *TestImplementation) VerifyRestorePassword(ctx context.Context, w io.Writer, id int64, verificationCode string) error {
+	args := t.Called(ctx, w, id, verificationCode)
+	return args.Error(0)
+}
+
 func (t *TestImplementation) Auth(context context.Context, tokenString string) (int64, error) {
 	args := t.Called(context, tokenString)
 	return int64(args.Int(0)), args.Error(1)

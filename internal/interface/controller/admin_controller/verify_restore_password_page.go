@@ -15,7 +15,7 @@ func (c *controller) VerifyRestorePasswordPage(w http.ResponseWriter, r *http.Re
 
 	err = c.interactor.VerifyRestorePasswordPage(context.WithValue(r.Context(), "db", c.db), w, id)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusExpectationFailed)
+		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 }

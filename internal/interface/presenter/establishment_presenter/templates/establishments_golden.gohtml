@@ -9,14 +9,16 @@
                             name1
                         </h3>
                         <div class="place-card-url">
-                            oddmenu.com/p/link1
+                            piarmenu.com/e/link1
                         </div>
                         <div class="place-card-buttons">
                             <a href="/admin/e/link1" class="base-button base-button-default">Редактировать</a>
                             <button
                                     id="open_delete_establishment_dialog_1"
                                     class="base-button base-button-secondary"
-                            >Удалить</button>
+                            >
+                                Удалить
+                            </button>
                         </div>
                     </div>
                     <script>
@@ -40,7 +42,14 @@
                             hx-target="#establishments_page"
                             hx-swap="outerHTML"
                             class="base-button base-button-default"
-                    >Удалить</button>
+                    >
+                        <span class="button-text">
+                            Удалить
+                        </span>
+                        <div class="htmx-indicator spinner">
+                            <div class="spinner-icon"></div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -57,14 +66,16 @@
                             name2
                         </h3>
                         <div class="place-card-url">
-                            oddmenu.com/p/link2
+                            piarmenu.com/e/link2
                         </div>
                         <div class="place-card-buttons">
                             <a href="/admin/e/link2" class="base-button base-button-default">Редактировать</a>
                             <button
                                     id="open_delete_establishment_dialog_2"
                                     class="base-button base-button-secondary"
-                            >Удалить</button>
+                            >
+                                Удалить
+                            </button>
                         </div>
                     </div>
                     <script>
@@ -88,7 +99,14 @@
                             hx-target="#establishments_page"
                             hx-swap="outerHTML"
                             class="base-button base-button-default"
-                    >Удалить</button>
+                    >
+                        <span class="button-text">
+                            Удалить
+                        </span>
+                        <div class="htmx-indicator spinner">
+                            <div class="spinner-icon"></div>
+                        </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -117,9 +135,10 @@
     <div class="base-modal" id="create_form" style="display: none">
         <form
                 hx-post="/admin/establishment/"
-                hx-target="#establishments_page"
-                hx-swap="outerHTML"
+                hx-target="#main_body"
+                hx-swap="innerHTML"
                 id="create_establishment_form"
+                hx-on:htmx:after-request="afterCreateSwap(event)"
         >
             <div class="base-modal-overlay"></div>
             <div class="base-modal-main">
@@ -177,8 +196,17 @@
                 </div>
                 <div class="base-modal-footer">
                     <div class="crud-modal-footer">
-                        <button class="base-button base-button-secondary" id="close_form_button">Отменить</button>
-                        <button type="submit" class="base-button base-button-default" id="create_establishment_button">Сохранить</button>
+                        <button class="base-button base-button-secondary" id="close_form_button">
+                                Отменить
+                        </button>
+                        <button type="submit" class="base-button base-button-default" id="create_establishment_button">
+                            <span class="button-text">
+                                Сохранить
+                            </span>
+                            <div class="htmx-indicator spinner">
+                                <div class="spinner-icon"></div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -187,15 +215,23 @@
     <script>
         document.getElementById("close_form_button").addEventListener("click", function (event) {
             event.preventDefault();
+            console.log('here');
             document.getElementById("create_form").style.display = "none";
+            console.log(document.getElementById("create_form").style.display);
         })
 
-        document.getElementById("create_establishment_form").addEventListener('submit', function () {
-            setTimeout(function () {
+        function afterCreateSwap(event) {
+            if (event.detail.elt.id === "create_establishment_form") {
                 document.getElementById("create_establishment_form").reset();
                 document.getElementById("create_form").style.display = "none";
-            }, 10)
-        })
+                console.log(document.getElementById("create_form").style.display);
+            }
+        }
+
+        
+        
+        
+        
 
         async function checkLink(event) {
             if (event.detail.xhr.responseText === "true") {
